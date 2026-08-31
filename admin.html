@@ -2477,6 +2477,25 @@
   }
   .admin-form-field textarea{resize:vertical;min-height:90px;}
   #adminArticleBody{min-height:260px;line-height:1.55;}
+  .admin-typography-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;}
+  .admin-typography-grid>div{display:flex;flex-direction:column;gap:4px;}
+  .admin-typography-grid span{font-size:10px;font-weight:800;color:var(--ink-soft);}
+  .admin-field-help{font-size:10px;color:var(--ink-soft);line-height:1.35;}
+  .admin-media-options{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin-top:7px;}
+  .admin-media-options label{font-size:8px!important;margin:0!important;}
+  .admin-media-options select{width:100%;padding:6px!important;font-size:9px!important;}
+  .manual-inline-media{margin:20px auto;}
+  .manual-inline-media.media-full{width:100%;}
+  .manual-inline-media.media-large{width:min(82%,760px);}
+  .manual-inline-media.media-medium{width:min(58%,560px);}
+  .manual-inline-media.media-left{margin-left:0;margin-right:auto;}
+  .manual-inline-media.media-center{margin-left:auto;margin-right:auto;}
+  .manual-inline-media.media-right{margin-left:auto;margin-right:0;}
+  .manual-inline-media img{width:100%;height:auto;display:block;border-radius:4px;}
+  .manual-inline-media video{width:100%;max-height:75vh;background:#000;display:block;border-radius:4px;}
+  .manual-inline-media iframe{width:100%;aspect-ratio:16/9;border:0;display:block;border-radius:4px;}
+  .manual-inline-media figcaption,.manual-inline-media .article-video-caption{margin-top:6px;font-size:12px;color:var(--ink-soft);line-height:1.4;}
+  @media(max-width:650px){.admin-typography-grid,.admin-media-options{grid-template-columns:1fr;}.manual-inline-media.media-large,.manual-inline-media.media-medium{width:100%;}}
   .admin-photo-preview{
     margin-top:7px;
     display:none;
@@ -2702,6 +2721,33 @@
   .admin-gallery-video-thumb{
     display:flex;align-items:center;justify-content:center;
     font-size:22px;
+  }
+  .admin-gallery-video-file{
+    width:74px;height:60px;
+    display:flex;align-items:center;justify-content:center;
+    text-align:center;
+    padding:5px;
+    background:#111;color:#fff;border-radius:3px;
+    font-size:9px;font-weight:800;line-height:1.2;
+  }
+  .admin-video-upload-note{
+    margin-top:6px;
+    font-size:10px;
+    color:var(--muted);
+    line-height:1.35;
+  }
+  .article-video-file-wrap{
+    width:100%;
+    margin:14px 0;
+    background:#000;
+    border-radius:6px;
+    overflow:hidden;
+  }
+  .article-video-file-wrap video{
+    width:100%;
+    max-height:75vh;
+    display:block;
+    background:#000;
   }
   .admin-gallery-row input,
   .admin-gallery-row textarea{
@@ -3970,6 +4016,37 @@
             </div>
 
             <div class="admin-form-field full">
+              <label>Tipografia da matéria</label>
+              <div class="admin-typography-grid">
+                <div><span>Título</span><select id="adminArticleTitleFont"><option value="default">Padrão do portal</option>
+                    <option value="georgia">Georgia</option>
+                    <option value="arial">Arial</option>
+                    <option value="times">Times New Roman</option>
+                    <option value="verdana">Verdana</option>
+                    <option value="trebuchet">Trebuchet MS</option>
+                    <option value="serif">Serif editorial</option>
+                    <option value="sans">Sans-serif moderna</option></select></div>
+                <div><span>Resumo</span><select id="adminArticleSummaryFont"><option value="default">Padrão do portal</option>
+                    <option value="georgia">Georgia</option>
+                    <option value="arial">Arial</option>
+                    <option value="times">Times New Roman</option>
+                    <option value="verdana">Verdana</option>
+                    <option value="trebuchet">Trebuchet MS</option>
+                    <option value="serif">Serif editorial</option>
+                    <option value="sans">Sans-serif moderna</option></select></div>
+                <div><span>Texto</span><select id="adminArticleBodyFont"><option value="default">Padrão do portal</option>
+                    <option value="georgia">Georgia</option>
+                    <option value="arial">Arial</option>
+                    <option value="times">Times New Roman</option>
+                    <option value="verdana">Verdana</option>
+                    <option value="trebuchet">Trebuchet MS</option>
+                    <option value="serif">Serif editorial</option>
+                    <option value="sans">Sans-serif moderna</option></select></div>
+              </div>
+              <small class="admin-field-help">A fonte escolhida será usada somente nesta matéria.</small>
+            </div>
+
+            <div class="admin-form-field full">
               <label for="adminArticleSummary">Resumo / abertura</label>
               <textarea id="adminArticleSummary" maxlength="900" placeholder="Texto que aparece no card e na abertura da matéria."></textarea>
             </div>
@@ -3990,9 +4067,11 @@
               <div class="admin-gallery-builder">
                 <h4>Mídia adicional da matéria</h4>
                 <div class="admin-gallery-actions">
-                  <button type="button" id="adminAddGalleryImageBtn">＋ Adicionar foto</button>
-                  <button type="button" id="adminAddGalleryVideoBtn">＋ Adicionar vídeo</button>
+                  <button type="button" id="adminAddGalleryImageBtn">＋ Adicionar fotos</button>
+                  <button type="button" id="adminUploadGalleryVideoBtn">⬆ Enviar vídeo da galeria</button>
+                  <button type="button" id="adminAddGalleryVideoBtn">🔗 Vídeo por link</button>
                   <input type="file" id="adminGalleryImageInput" accept="image/*" multiple style="display:none">
+                  <input type="file" id="adminGalleryVideoInput" accept="video/*,video/mp4,video/webm,video/quicktime" style="display:none">
                 </div>
                 <div class="admin-gallery-list" id="adminGalleryList"></div>
               </div>
@@ -6492,19 +6571,53 @@ function normalizeGalleryItems(items){
         return {
           type:'image',
           src:String(item.src),
-          caption:String(item.caption || '')
+          caption:String(item.caption || ''),
+          position:String(item.position || 'end'),
+          width:String(item.width || 'full'),
+          align:String(item.align || 'center')
+        };
+      }
+      if((item?.type === 'video-file' || item?.uploaded === true) && item.url){
+        return {
+          type:'video-file',
+          url:String(item.url),
+          caption:String(item.caption || ''),
+          mime:String(item.mime || ''),
+          name:String(item.name || ''),
+          position:String(item.position || 'end'),
+          width:String(item.width || 'full'),
+          align:String(item.align || 'center')
         };
       }
       if(item?.type === 'video' && item.url){
         return {
           type:'video',
           url:String(item.url),
-          caption:String(item.caption || '')
+          caption:String(item.caption || ''),
+          position:String(item.position || 'end'),
+          width:String(item.width || 'full'),
+          align:String(item.align || 'center')
         };
       }
       return null;
     })
     .filter(Boolean);
+}
+
+function adminMediaOptionsHtml(item,index){
+  const pos=item.position||'end', width=item.width||'full', align=item.align||'center';
+  const opt=(v,l,c)=>`<option value="${v}"${c===v?' selected':''}>${l}</option>`;
+  return `<div class="admin-media-options">
+    <div><label>Posição</label><select data-gallery-position="${index}">
+      ${opt('top','Após foto principal',pos)}${opt('p1','Após 1º parágrafo',pos)}${opt('p2','Após 2º parágrafo',pos)}${opt('p3','Após 3º parágrafo',pos)}${opt('end','Final da matéria',pos)}
+    </select></div>
+    <div><label>Tamanho</label><select data-gallery-width="${index}">
+      ${opt('full','Largura total',width)}${opt('large','Grande',width)}${opt('medium','Médio',width)}
+    </select></div>
+    <div><label>Alinhamento</label><select data-gallery-align="${index}">
+      ${opt('left','Esquerda',align)}${opt('center','Centro',align)}${opt('right','Direita',align)}
+    </select></div>
+  </div>`;
 }
 
 function renderAdminGallery(){
@@ -6520,7 +6633,26 @@ function renderAdminGallery(){
     if(item.type === 'image'){
       return `<div class="admin-gallery-row" data-gallery-index="${index}">
         <img src="${escAttr(item.src)}" alt="">
-        <textarea data-gallery-caption="${index}" placeholder="Legenda da foto">${escHtml(item.caption || '')}</textarea>
+        <div>
+          <textarea data-gallery-caption="${index}" placeholder="Legenda da foto">${escHtml(item.caption || '')}</textarea>
+          ${adminMediaOptionsHtml(item,index)}
+        </div>
+        <button type="button" class="admin-gallery-remove" data-gallery-remove="${index}">×</button>
+      </div>`;
+    }
+
+    if(item.type === 'video-file'){
+      const videoThumb = item.url
+        ? `<video src="${escAttr(item.url)}" muted playsinline preload="metadata" style="width:74px;height:60px;object-fit:cover;background:#000;border-radius:3px;"></video>`
+        : `<div class="admin-gallery-video-file">ENVIANDO<br>VÍDEO…</div>`;
+      return `<div class="admin-gallery-row" data-gallery-index="${index}">
+        ${videoThumb}
+        <div>
+          <div style="font-size:10px;font-weight:800;margin:2px 0 7px;word-break:break-word;">${escHtml(item.name || 'Vídeo da galeria')}</div>
+          <textarea data-gallery-caption="${index}" placeholder="Legenda do vídeo">${escHtml(item.caption || '')}</textarea>
+          ${adminMediaOptionsHtml(item,index)}
+          <div class="admin-video-upload-note">Arquivo armazenado no Supabase Storage.</div>
+        </div>
         <button type="button" class="admin-gallery-remove" data-gallery-remove="${index}">×</button>
       </div>`;
     }
@@ -6530,6 +6662,7 @@ function renderAdminGallery(){
       <div>
         <input type="url" data-gallery-video-url="${index}" value="${escAttr(item.url || '')}" placeholder="Link do vídeo">
         <textarea data-gallery-caption="${index}" placeholder="Legenda do vídeo">${escHtml(item.caption || '')}</textarea>
+        ${adminMediaOptionsHtml(item,index)}
       </div>
       <button type="button" class="admin-gallery-remove" data-gallery-remove="${index}">×</button>
     </div>`;
@@ -6549,6 +6682,15 @@ function renderAdminGallery(){
       if(adminGalleryItems[i]) adminGalleryItems[i].caption = el.value;
     });
   });
+  list.querySelectorAll('[data-gallery-position]').forEach(el=>{
+    el.addEventListener('change',()=>{const i=Number(el.dataset.galleryPosition);if(adminGalleryItems[i]) adminGalleryItems[i].position=el.value;});
+  });
+  list.querySelectorAll('[data-gallery-width]').forEach(el=>{
+    el.addEventListener('change',()=>{const i=Number(el.dataset.galleryWidth);if(adminGalleryItems[i]) adminGalleryItems[i].width=el.value;});
+  });
+  list.querySelectorAll('[data-gallery-align]').forEach(el=>{
+    el.addEventListener('change',()=>{const i=Number(el.dataset.galleryAlign);if(adminGalleryItems[i]) adminGalleryItems[i].align=el.value;});
+  });
 
   list.querySelectorAll('[data-gallery-video-url]').forEach(el=>{
     el.addEventListener('input',()=>{
@@ -6562,7 +6704,7 @@ async function addGalleryImages(files){
   for(const file of Array.from(files || [])){
     try{
       const src = await compressManualImage(file);
-      adminGalleryItems.push({type:'image',src,caption:''});
+      adminGalleryItems.push({type:'image',src,caption:'',position:'end',width:'full',align:'center'});
     }catch(err){
       console.warn('Galeria:',err);
     }
@@ -6570,8 +6712,91 @@ async function addGalleryImages(files){
   renderAdminGallery();
 }
 
+const ARTICLE_VIDEOS_BUCKET = 'article-videos';
+const ARTICLE_VIDEO_MAX_BYTES = 100 * 1024 * 1024; // 100 MB
+
+function safeVideoFileName(name='video.mp4'){
+  const dot = name.lastIndexOf('.');
+  const ext = dot >= 0 ? name.slice(dot).toLowerCase().replace(/[^a-z0-9.]/g,'') : '';
+  const base = (dot >= 0 ? name.slice(0,dot) : name)
+    .normalize('NFD').replace(/[\u0300-\u036f]/g,'')
+    .replace(/[^a-zA-Z0-9_-]+/g,'-')
+    .replace(/^-+|-+$/g,'')
+    .slice(0,60) || 'video';
+  return `${base}${ext || '.mp4'}`;
+}
+
+async function uploadGalleryVideo(file){
+  if(!file) return;
+  const status = document.getElementById('adminEditorStatus');
+
+  if(!siteSupabase){
+    throw new Error('Supabase não está conectado.');
+  }
+
+  const fileName = String(file.name || '').toLowerCase();
+  const looksLikeVideo =
+    String(file.type || '').startsWith('video/') ||
+    /\.(mp4|mov|m4v|webm|avi)$/i.test(fileName);
+
+  if(!looksLikeVideo){
+    throw new Error('Escolha um arquivo de vídeo MP4, MOV, M4V ou WEBM.');
+  }
+
+  if(file.size > ARTICLE_VIDEO_MAX_BYTES){
+    throw new Error('O vídeo é maior que 100 MB. Comprima o arquivo ou envie um vídeo menor.');
+  }
+
+  const safeName = safeVideoFileName(file.name);
+  const objectPath = `materias/${new Date().toISOString().slice(0,10)}/${Date.now()}-${Math.random().toString(36).slice(2,9)}-${safeName}`;
+
+  if(status) status.textContent = 'Enviando vídeo para o servidor…';
+
+  const {error} = await siteSupabase.storage
+    .from(ARTICLE_VIDEOS_BUCKET)
+    .upload(objectPath, file, {
+      cacheControl:'3600',
+      upsert:false,
+      contentType:String(file.type || '').startsWith('video/') ? file.type : (
+        /\.mov$/i.test(fileName) ? 'video/quicktime' :
+        /\.webm$/i.test(fileName) ? 'video/webm' :
+        /\.m4v$/i.test(fileName) ? 'video/x-m4v' :
+        'video/mp4'
+      )
+    });
+
+  if(error) throw error;
+
+  const {data} = siteSupabase.storage
+    .from(ARTICLE_VIDEOS_BUCKET)
+    .getPublicUrl(objectPath);
+
+  const publicUrl = data?.publicUrl;
+  if(!publicUrl) throw new Error('Não foi possível gerar o endereço público do vídeo.');
+
+  adminGalleryItems.push({
+    type:'video-file',
+    uploaded:true,
+    url:publicUrl,
+    caption:'',
+    mime:String(file.type || '').startsWith('video/') ? file.type : (
+      /\.mov$/i.test(fileName) ? 'video/quicktime' :
+      /\.webm$/i.test(fileName) ? 'video/webm' :
+      /\.m4v$/i.test(fileName) ? 'video/x-m4v' :
+      'video/mp4'
+    ),
+    name:file.name || safeName,
+    position:'end',
+    width:'full',
+    align:'center'
+  });
+
+  renderAdminGallery();
+  if(status) status.textContent = 'Vídeo enviado. Agora salve ou publique a matéria.';
+}
+
 function addGalleryVideo(){
-  adminGalleryItems.push({type:'video',url:'',caption:''});
+  adminGalleryItems.push({type:'video',url:'',caption:'',position:'end',width:'full',align:'center'});
   renderAdminGallery();
 }
 
@@ -6597,6 +6822,15 @@ function renderArticleGallery(item,target='category'){
         <img src="${escAttr(media.src)}" alt="${escAttr(media.caption || item?.title || '')}" loading="lazy">
         ${media.caption ? `<figcaption>${escHtml(media.caption)}</figcaption>` : ''}
       </figure>`;
+    }
+
+    if(media.type === 'video-file'){
+      return `<div>
+        <div class="article-video-file-wrap">
+          <video controls playsinline preload="metadata" src="${escAttr(media.url)}"${media.mime ? ` type="${escAttr(media.mime)}"` : ''}></video>
+        </div>
+        ${media.caption ? `<div class="article-video-caption">${escHtml(media.caption)}</div>` : ''}
+      </div>`;
     }
 
     const embed = galleryVideoEmbedUrl(media.url);
@@ -6671,6 +6905,9 @@ function resetAdminEditor(){
   document.getElementById('adminArticleTitleInput').value = '';
   document.getElementById('adminArticleSummary').value = '';
   document.getElementById('adminArticleBody').value = '';
+  document.getElementById('adminArticleTitleFont').value = 'default';
+  document.getElementById('adminArticleSummaryFont').value = 'default';
+  document.getElementById('adminArticleBodyFont').value = 'default';
   document.getElementById('adminArticleImageFile').value = '';
 
   renderAdminGallery();
@@ -6704,6 +6941,9 @@ function editAdminArticle(id){
   document.getElementById('adminArticleTitleInput').value = item.title || '';
   document.getElementById('adminArticleSummary').value = item.desc || '';
   document.getElementById('adminArticleBody').value = item.fullText || '';
+  document.getElementById('adminArticleTitleFont').value = item.titleFont || 'default';
+  document.getElementById('adminArticleSummaryFont').value = item.summaryFont || 'default';
+  document.getElementById('adminArticleBodyFont').value = item.bodyFont || 'default';
   document.getElementById('adminArticleImageFile').value = '';
 
   renderAdminGallery();
@@ -6728,9 +6968,12 @@ function adminEditorPayload(status){
   const category = document.getElementById('adminArticleCategory')?.value || 'politica';
   const placement = document.getElementById('adminArticlePlacement')?.value || 'normal';
   const scheduledLocal = document.getElementById('adminArticleSchedule')?.value || '';
+  const titleFont=document.getElementById('adminArticleTitleFont')?.value||'default';
+  const summaryFont=document.getElementById('adminArticleSummaryFont')?.value||'default';
+  const bodyFont=document.getElementById('adminArticleBodyFont')?.value||'default';
 
   return {
-    title,summary,fullText,category,placement,status,
+    title,summary,fullText,category,placement,status,titleFont,summaryFont,bodyFont,
     scheduledAt: scheduledLocal ? new Date(scheduledLocal).toISOString() : ''
   };
 }
@@ -6828,6 +7071,9 @@ async function saveAdminArticle(status){
     title:payload.title,
     desc:payload.summary || payload.fullText.slice(0,320),
     fullText:payload.fullText,
+    titleFont:payload.titleFont,
+    summaryFont:payload.summaryFont,
+    bodyFont:payload.bodyFont,
     image:adminEditingImageData || item.image || '',
     status,
     placement:payload.placement,
@@ -7044,11 +7290,78 @@ document.getElementById('adminAddGalleryImageBtn')?.addEventListener('click',()=
   document.getElementById('adminGalleryImageInput')?.click();
 });
 
+document.getElementById('adminUploadGalleryVideoBtn')?.addEventListener('click',()=>{
+  const input=document.getElementById('adminGalleryVideoInput');
+  const status=document.getElementById('adminEditorStatus');
+  if(status) status.textContent='Escolha um vídeo da galeria do aparelho…';
+  if(input){
+    input.removeAttribute('capture');
+    input.click();
+  }
+});
+
 document.getElementById('adminAddGalleryVideoBtn')?.addEventListener('click',addGalleryVideo);
 
 document.getElementById('adminGalleryImageInput')?.addEventListener('change',async(e)=>{
   await addGalleryImages(e.target.files);
   e.target.value='';
+});
+
+document.getElementById('adminGalleryVideoInput')?.addEventListener('change',async(e)=>{
+  const file = e.target.files?.[0];
+  e.target.value='';
+  if(!file){
+    const status=document.getElementById('adminEditorStatus');
+    if(status) status.textContent='Nenhum vídeo selecionado.';
+    return;
+  }
+
+  const status = document.getElementById('adminEditorStatus');
+  const pendingId='pending-'+Date.now();
+
+  adminGalleryItems.push({
+    type:'video-file',
+    uploaded:true,
+    url:'',
+    caption:'',
+    mime:file.type || '',
+    name:'Enviando: '+(file.name || 'vídeo'),
+    position:'end',
+    width:'full',
+    align:'center',
+    _pendingId:pendingId
+  });
+  renderAdminGallery();
+
+  try{
+    await uploadGalleryVideo(file);
+
+    // Remove the temporary "enviando" row after the real item is inserted.
+    adminGalleryItems = adminGalleryItems.filter(x=>x._pendingId!==pendingId);
+    renderAdminGallery();
+
+    if(status) status.textContent='Vídeo pronto. Salve ou publique a matéria.';
+  }catch(err){
+    adminGalleryItems = adminGalleryItems.filter(x=>x._pendingId!==pendingId);
+    renderAdminGallery();
+
+    console.error('Upload de vídeo:',err);
+    const raw=String(err?.message || err || 'erro desconhecido');
+    let msg=raw;
+
+    if(/bucket.*not found|not found/i.test(raw)){
+      msg='O armazenamento de vídeos não foi encontrado no Supabase. Verifique se o bucket article-videos foi criado.';
+    }else if(/row-level security|policy|permission|unauthorized|403/i.test(raw)){
+      msg='O Supabase bloqueou o upload do vídeo. As permissões do bucket article-videos precisam ser corrigidas.';
+    }else if(/mime|content.?type|type.*not allowed/i.test(raw)){
+      msg='Esse formato de vídeo foi bloqueado pelo Supabase. Tente MP4 ou ajuste os formatos permitidos do bucket.';
+    }else if(/maximum|too large|size/i.test(raw)){
+      msg='O vídeo ultrapassa o limite permitido. Tente um arquivo menor.';
+    }
+
+    if(status) status.textContent = msg;
+    alert('Não foi possível enviar o vídeo.\n\n' + msg);
+  }
 });
 
 document.getElementById('adminArticleImageFile')?.addEventListener('change',async(e)=>{
@@ -7104,6 +7417,29 @@ async function processScheduledArticles(){
   return true;
 }
 
+const MANUAL_FONT_MAP={
+  default:'',georgia:'Georgia, "Times New Roman", serif',arial:'Arial, Helvetica, sans-serif',
+  times:'"Times New Roman", Times, serif',verdana:'Verdana, Geneva, sans-serif',
+  trebuchet:'"Trebuchet MS", Arial, sans-serif',serif:'Georgia, Cambria, "Times New Roman", serif',
+  sans:'Inter, Arial, Helvetica, sans-serif'
+};
+function manualFontCss(key){return MANUAL_FONT_MAP[key]||'';}
+function manualMediaHtml(media,item){
+  const cls=`manual-inline-media media-${media.width||'full'} media-${media.align||'center'}`;
+  if(media.type==='image') return `<figure class="${cls}"><img src="${escAttr(media.src)}" alt="${escAttr(media.caption||item?.title||'')}" loading="lazy">${media.caption?`<figcaption>${escHtml(media.caption)}</figcaption>`:''}</figure>`;
+  if(media.type==='video-file') return `<div class="${cls}"><video controls playsinline preload="metadata" src="${escAttr(media.url)}"></video>${media.caption?`<div class="article-video-caption">${escHtml(media.caption)}</div>`:''}</div>`;
+  const embed=galleryVideoEmbedUrl(media.url); if(!embed) return '';
+  return `<div class="${cls}"><iframe src="${escAttr(embed)}" title="${escAttr(media.caption||item?.title||'Vídeo')}" loading="lazy" allowfullscreen></iframe>${media.caption?`<div class="article-video-caption">${escHtml(media.caption)}</div>`:''}</div>`;
+}
+function renderManualArticleContent(item){
+  const body=manualTextParagraphs(item.fullText||item.desc), media=normalizeGalleryItems(item.gallery);
+  const g={top:[],p1:[],p2:[],p3:[],end:[]}; media.forEach(m=>(g[m.position]||g.end).push(m));
+  const mh=a=>a.map(m=>manualMediaHtml(m,item)).join('');
+  let out=mh(g.top);
+  body.forEach((p,i)=>{out+=`<p>${escHtml(p)}</p>`;if(i===0)out+=mh(g.p1);if(i===1)out+=mh(g.p2);if(i===2)out+=mh(g.p3);});
+  return out+mh(g.end);
+}
+
 function openManualArticle(item){
   registerManualArticleView(item);
   if(!item) return false;
@@ -7149,10 +7485,13 @@ function openManualArticle(item){
   document.getElementById('categoryArticleMeta').textContent =
     `${newsRelativeTime(item.pubDate)} · Informa na Hora`;
 
-  const body = manualTextParagraphs(item.fullText || item.desc);
-  document.getElementById('categoryArticleSummary').innerHTML =
-    body.map(p=>`<p>${escHtml(p)}</p>`).join('');
-  renderArticleGallery(item,'category');
+  const articleTitleEl=document.getElementById('categoryArticleTitle');
+  const articleBodyEl=document.getElementById('categoryArticleSummary');
+  articleTitleEl.style.fontFamily=manualFontCss(item.titleFont);
+  articleBodyEl.style.fontFamily=manualFontCss(item.bodyFont);
+  articleBodyEl.innerHTML=renderManualArticleContent(item);
+  const legacyGallery=document.getElementById('categoryArticleGallery');
+  if(legacyGallery){legacyGallery.innerHTML='';legacyGallery.style.display='none';}
 
   const img = document.getElementById('categoryArticleImage');
   if(item.image){
