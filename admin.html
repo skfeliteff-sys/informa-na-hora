@@ -2845,13 +2845,80 @@
     .videos-featured-info{padding:18px;}
   }
 
-  /* Admin separado: nunca exibir no site público */
-  #stealthAdminModal, #adminDashboard, #manualArticleModal, #adminPreviewModal {
+
+  /* ============================================================
+     PÁGINA ADMINISTRATIVA SEPARADA
+     ============================================================ */
+  body.admin-page{
+    background:#f3f5f7;
+  }
+  body.admin-page header.main,
+  body.admin-page #top,
+  body.admin-page #electionsMain,
+  body.admin-page #liveNewsMain,
+  body.admin-page #sportsMain,
+  body.admin-page #sportsArticleMain,
+  body.admin-page #categoryMain,
+  body.admin-page #categoryArticleMain,
+  body.admin-page #videosMain,
+  body.admin-page footer{
     display:none !important;
   }
+  body.admin-page #adminDashboard{
+    z-index:99990;
+  }
+  body.admin-page #stealthAdminModal{
+    z-index:99999;
+  }
+  .admin-mobile-brand{
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    z-index:99980;
+    height:54px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    padding:0 16px;
+    background:#111;
+    color:#fff;
+    box-shadow:0 2px 12px rgba(0,0,0,.15);
+  }
+  .admin-mobile-brand strong{
+    font-size:15px;
+    letter-spacing:.02em;
+  }
+  .admin-mobile-brand a{
+    color:#fff;
+    text-decoration:none;
+    font-size:12px;
+    font-weight:800;
+    border:1px solid rgba(255,255,255,.45);
+    border-radius:4px;
+    padding:8px 10px;
+  }
+  body.admin-page .admin-dashboard{
+    padding-top:66px;
+  }
+  @media (max-width:700px){
+    body.admin-page .admin-dashboard{
+      padding:62px 6px 8px;
+    }
+    body.admin-page .admin-dashboard-shell{
+      min-height:calc(100vh - 70px);
+    }
+  }
+
 </style>
 </head>
-<body>
+<body class=\"admin-page\">
+<div class="admin-mobile-brand" id="adminMobileBrand">
+  <strong>Informa na Hora · Administração</strong>
+  <a href="index.html">Ver site</a>
+</div>
+
 
 <div class="edit-banner">Modo edição ativo — clique nos textos para editar, nas imagens para trocá-las, e use "+ Adicionar notícia" no fim de cada seção para criar novos cards. Não esqueça de salvar.</div>
 
@@ -3794,7 +3861,7 @@
   <div class="admin-dialog" role="dialog" aria-modal="true" aria-labelledby="stealthAdminTitle">
     <div class="admin-dialog-head">
       <div>
-        <h2 id="stealthAdminTitle">Acesso restrito</h2>
+        <h2 id="stealthAdminTitle">Painel Administrativo</h2>
         <p>Digite a senha administrativa.</p>
       </div>
       <button class="admin-close" id="stealthAdminClose" type="button" aria-label="Fechar">×</button>
@@ -3802,7 +3869,7 @@
 
     <div class="admin-field">
       <label for="stealthAdminPassword">Senha</label>
-      <input type="password" id="stealthAdminPassword" autocomplete="off" inputmode="numeric" placeholder="••••••">
+      <input type="password" id="stealthAdminPassword" autocomplete="current-password" inputmode="numeric" placeholder="Digite sua senha">
     </div>
 
     <button class="admin-submit" id="stealthAdminSubmit" type="button">Entrar</button>
@@ -3825,8 +3892,8 @@
       <div class="admin-dashboard-head-actions">
         <button type="button" class="primary" id="adminNewArticleBtn">＋ Nova matéria</button>
         <button type="button" id="adminOpenSiteEditBtn">Editar layout</button>
-        <button type="button" id="adminDashboardLogoutBtn">Sair do Admin</button>
-        <button type="button" id="adminDashboardCloseBtn">Fechar</button>
+        <button type="button" id="adminDashboardLogoutBtn">Sair</button>
+        <button type="button" id="adminDashboardCloseBtn">Minimizar</button>
       </div>
     </div>
 
@@ -4152,8 +4219,6 @@ function requireAdmin(message='Acesso administrativo necessário.'){
 }
 
 function openStealthAdmin(){
-  // O painel administrativo agora fica somente em /admin.html
-  return;
   if(isSiteAdmin){
     openAdminDashboard();
     return;
@@ -4225,10 +4290,10 @@ function stealthAdminLogout(){
   setAdminUi(false);
   document.body.classList.remove('admin-authenticated','edit-mode');
   closeStealthAdmin();
+  setTimeout(()=>openStealthAdmin(),120);
 }
 
-// Painel administrativo removido do site público.
-document.addEventListener('keydown',()=>{});
+// Nesta página o login abre automaticamente; PGP não é necessário.
 
 document.getElementById('stealthAdminSubmit')?.addEventListener('click',stealthAdminLogin);
 document.getElementById('stealthAdminClose')?.addEventListener('click',closeStealthAdmin);
@@ -4240,7 +4305,15 @@ document.getElementById('stealthAdminModal')?.addEventListener('click',(e)=>{
   if(e.target.id === 'stealthAdminModal') closeStealthAdmin();
 });
 
+
 setAdminUi(false);
+
+/* Abre o login automaticamente ao acessar /admin.html. */
+window.addEventListener('DOMContentLoaded',()=>{
+  document.body.classList.add('admin-page');
+  setTimeout(()=>openStealthAdmin(),120);
+});
+
 </script>
 
 <script>
