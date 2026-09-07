@@ -2917,12 +2917,13 @@
 
 <header class="main">
   <div class="wrap header-inner">
-    <a class="logo" href="#top" onclick="showHomePage()">
+    <a class="logo" href="#ao-vivo" onclick="showLivePage(); return false;">
       <span class="mark" aria-hidden="true"></span>
       <span class="word">Informa<em>naHora</em></span>
     </a>
     <nav class="primary" id="primaryNav">
       <a class="live" href="#ao-vivo" id="navAoVivo" onclick="showLivePage(); return false;">Ao Vivo</a>
+      <a href="#rondonia" id="navRondonia" onclick="showCategoryPage('rondonia'); return false;">Rondônia</a>
       <a href="#politica" id="navPolitica" onclick="showCategoryPage('politica'); return false;">Política</a>
       <a href="#economia" id="navEconomia" onclick="showCategoryPage('economia'); return false;">Economia</a>
       <a href="#mundo" id="navMundo" onclick="showCategoryPage('mundo'); return false;">Mundo</a>
@@ -3483,7 +3484,7 @@
 
 
 <main class="wrap elections-page" id="electionsMain" style="display:none!important">
-  <a class="back-link" href="#top" onclick="showHomePage()">← Voltar para a Home</a>
+  <a class="back-link" href="#ao-vivo" onclick="showLivePage(); return false;">← Voltar para Ao Vivo</a>
 
   <div class="elections-head">
     <h1>Eleições</h1>
@@ -3536,7 +3537,7 @@
 </main>
 
 <main class="wrap live-page" id="liveNewsMain" style="display:none">
-  <a class="back-link" href="#top" onclick="showHomePage()">← Voltar para a Home</a>
+  <a class="back-link" href="#ao-vivo" onclick="showLivePage(); return false;">← Voltar para Ao Vivo</a>
   <div class="live-page-head">
     <h1>Ao Vivo</h1>
     <div class="live-status">Atualizando em tempo real</div>
@@ -3547,7 +3548,7 @@
 </main>
 
 <main class="wrap sports-page" id="sportsMain" style="display:none">
-  <a class="back-link" href="#top" onclick="showHomePage()">← Voltar para a Home</a>
+  <a class="back-link" href="#ao-vivo" onclick="showLivePage(); return false;">← Voltar para Ao Vivo</a>
 
   
   <nav class="sports-category-subnav active" id="sportsCategorySubnav" aria-label="Seções de Esportes">
@@ -3736,7 +3737,7 @@
 </main>
 
 <main class="wrap sports-page" id="categoryMain" style="display:none">
-  <a class="back-link" href="#top" onclick="showHomePage()">← Voltar para a Home</a>
+  <a class="back-link" href="#ao-vivo" onclick="showLivePage(); return false;">← Voltar para Ao Vivo</a>
 
   <section class="politics-mag" id="politicsMagazine">
     <div class="politics-mag-top">
@@ -3781,7 +3782,7 @@
 
 
 <main class="wrap videos-page" id="videosMain" style="display:none">
-  <a class="back-link" href="#top" onclick="showHomePage(); return false;">← Voltar para a Home</a>
+  <a class="back-link" href="#ao-vivo" onclick="showLivePage(); return false;">← Voltar para Ao Vivo</a>
 
   <div class="videos-page-head">
     <div>
@@ -3810,7 +3811,7 @@
 
 <footer>
   <div class="wrap footer-top">
-    <a class="logo" href="#top" onclick="showHomePage()">
+    <a class="logo" href="#ao-vivo" onclick="showLivePage(); return false;">
       <span class="mark" aria-hidden="true"></span>
       <span class="word">Informa<em>naHora</em></span>
     </a>
@@ -3919,7 +3920,8 @@
             <div class="admin-form-field">
               <label for="adminArticleCategory">Categoria</label>
               <select id="adminArticleCategory">
-                <option value="politica">Política</option>
+                <option value="rondonia">Rondônia</option>
+          <option value="politica">Política</option>
                 <option value="economia">Economia</option>
                 <option value="mundo">Mundo</option>
                 <option value="tecnologia">Tecnologia</option>
@@ -3935,6 +3937,14 @@
                 <option value="headline">Manchete principal</option>
                 <option value="urgent">Urgente</option>
               </select>
+            </div>
+
+            <div class="admin-form-field full">
+              <label style="display:flex;align-items:center;gap:10px;cursor:pointer">
+                <input type="checkbox" id="adminArticleHome" style="width:auto">
+                Exibir esta matéria na Home
+              </label>
+              <div class="admin-schedule-help">Quando marcada, esta matéria vira o destaque principal da página inicial.</div>
             </div>
 
             <div class="admin-form-field full">
@@ -4510,6 +4520,7 @@ document.addEventListener('keydown',(e)=>{
    ============================================================ */
 function latestNewsCategoryLabel(key){
   return {
+    rondonia:'Rondônia',
     politica:'Política',
     economia:'Economia',
     mundo:'Mundo',
@@ -5790,22 +5801,8 @@ function showSportsPage(){
   loadSportsNews();
 }
 function showHomePage(){
-  document.getElementById('videosMain') && (document.getElementById('videosMain').style.display='none');
-  document.getElementById('categoryRelatedNews') && (document.getElementById('categoryRelatedNews').style.display='none');
-  document.getElementById('sportsRelatedNews') && (document.getElementById('sportsRelatedNews').style.display='none');
-  hideSportsSectionSubnav();
-  document.getElementById('politicsElectionSubnav')?.classList.remove('active');
-  document.getElementById('politicsElectionContent')?.classList.remove('active');
-  hideElectionsSubnav();
-  document.getElementById('electionsMain') && (document.getElementById('electionsMain').style.display = 'none');
-  document.getElementById('liveNewsMain') && (document.getElementById('liveNewsMain').style.display = 'none');
-  document.getElementById('sportsMain').style.display = 'none';
-  document.getElementById('categoryMain').style.display = 'none';
-  document.getElementById('sportsArticleMain').style.display = 'none';
-  document.getElementById('categoryArticleMain').style.display = 'none';
-  document.getElementById('top').style.display = '';
-  document.getElementById('navEsportes')?.classList.remove('active-view');
-  clearNavActiveStates();
+  // Compatibilidade com links antigos: a página principal agora é Ao Vivo.
+  showLivePage();
 }
 
 /* ============================================================
@@ -5827,6 +5824,7 @@ const NEWS_FEEDS = {
   esportes:  'https://agenciabrasil.ebc.com.br/rss/esportes/feed.xml',
 };
 const CATEGORY_CONFIG = {
+  rondonia:   { label:'Rondônia',   sub:'Notícias de Rondônia publicadas pela redação do Informa na Hora.' },
   politica:   { label:'Política',   sub:'As últimas decisões do Congresso, do governo e do STF, atualizadas automaticamente.' },
   economia:   { label:'Economia',   sub:'Indicadores, mercado e negócios — direto da cobertura nacional, atualizado automaticamente.' },
   mundo:      { label:'Mundo',      sub:'Os principais fatos internacionais, atualizados automaticamente.' },
@@ -6569,11 +6567,8 @@ function renderAdminGallery(){
     }
 
     if(item.type === 'video-file'){
-      const videoThumb = item.url
-        ? `<video src="${escAttr(item.url)}" muted playsinline preload="metadata" style="width:74px;height:60px;object-fit:cover;background:#000;border-radius:3px;"></video>`
-        : `<div class="admin-gallery-video-file">ENVIANDO<br>VÍDEO…</div>`;
       return `<div class="admin-gallery-row" data-gallery-index="${index}">
-        ${videoThumb}
+        <div class="admin-gallery-video-file">VÍDEO<br>ENVIADO</div>
         <div>
           <div style="font-size:10px;font-weight:800;margin:2px 0 7px;word-break:break-word;">${escHtml(item.name || 'Vídeo da galeria')}</div>
           <textarea data-gallery-caption="${index}" placeholder="Legenda do vídeo">${escHtml(item.caption || '')}</textarea>
@@ -6661,13 +6656,8 @@ async function uploadGalleryVideo(file){
     throw new Error('Supabase não está conectado.');
   }
 
-  const fileName = String(file.name || '').toLowerCase();
-  const looksLikeVideo =
-    String(file.type || '').startsWith('video/') ||
-    /\.(mp4|mov|m4v|webm|avi)$/i.test(fileName);
-
-  if(!looksLikeVideo){
-    throw new Error('Escolha um arquivo de vídeo MP4, MOV, M4V ou WEBM.');
+  if(!String(file.type || '').startsWith('video/')){
+    throw new Error('Escolha um arquivo de vídeo.');
   }
 
   if(file.size > ARTICLE_VIDEO_MAX_BYTES){
@@ -6684,12 +6674,7 @@ async function uploadGalleryVideo(file){
     .upload(objectPath, file, {
       cacheControl:'3600',
       upsert:false,
-      contentType:String(file.type || '').startsWith('video/') ? file.type : (
-        /\.mov$/i.test(fileName) ? 'video/quicktime' :
-        /\.webm$/i.test(fileName) ? 'video/webm' :
-        /\.m4v$/i.test(fileName) ? 'video/x-m4v' :
-        'video/mp4'
-      )
+      contentType:file.type || 'video/mp4'
     });
 
   if(error) throw error;
@@ -6706,12 +6691,7 @@ async function uploadGalleryVideo(file){
     uploaded:true,
     url:publicUrl,
     caption:'',
-    mime:String(file.type || '').startsWith('video/') ? file.type : (
-      /\.mov$/i.test(fileName) ? 'video/quicktime' :
-      /\.webm$/i.test(fileName) ? 'video/webm' :
-      /\.m4v$/i.test(fileName) ? 'video/x-m4v' :
-      'video/mp4'
-    ),
+    mime:file.type || 'video/mp4',
     name:file.name || safeName,
     position:'end',
     width:'full',
@@ -6804,6 +6784,30 @@ function adminArticlePlacementLabel(item){
   return 'Normal';
 }
 
+function renderManualHomeFeature(){
+  const item = manualArticles.find(a => a.showHome && (a.status || 'published') === 'published');
+  if(!item) return;
+  const article = document.querySelector('.hero-main article');
+  const title = document.querySelector('[data-key="hero-main-title"]');
+  const dek = document.querySelector('[data-key="hero-main-dek"]');
+  const art = document.querySelector('[data-img-key="hero-main-img"]');
+  if(!article || !title || !dek || !art) return;
+  const eyebrow = article.querySelector('.eyebrow');
+  const meta = article.querySelector('.meta');
+  if(eyebrow) eyebrow.textContent = `${manualCategoryLabel(item.category)} · Destaque`;
+  title.textContent = item.title || 'Matéria';
+  dek.textContent = item.desc || '';
+  if(meta) meta.textContent = `${newsRelativeTime(item.pubDate)} · Informa na Hora`;
+  if(item.image){
+    art.classList.add('has-image');
+    art.style.backgroundImage = `url("${String(item.image).replace(/"/g,'%22')}")`;
+  }
+  const open = () => { if(!document.body.classList.contains('edit-mode')) openManualArticle(item); };
+  title.style.cursor='pointer'; dek.style.cursor='pointer'; art.style.cursor='pointer';
+  title.onclick=open; dek.onclick=open; art.onclick=open;
+}
+
+
 function openAdminDashboard(){
   if(!isSiteAdmin) return;
   document.getElementById('adminDashboard')?.classList.add('open');
@@ -6828,6 +6832,7 @@ function resetAdminEditor(){
 
   document.getElementById('adminArticleCategory').value = 'politica';
   document.getElementById('adminArticlePlacement').value = 'normal';
+  document.getElementById('adminArticleHome').checked = false;
   document.getElementById('adminArticleSchedule').value = '';
   document.getElementById('adminArticleTitleInput').value = '';
   document.getElementById('adminArticleSummary').value = '';
@@ -6863,6 +6868,7 @@ function editAdminArticle(id){
 
   document.getElementById('adminArticleCategory').value = item.category || 'politica';
   document.getElementById('adminArticlePlacement').value = adminArticlePlacement(item);
+  document.getElementById('adminArticleHome').checked = !!item.showHome;
   document.getElementById('adminArticleSchedule').value =
     item.scheduledAt ? new Date(item.scheduledAt).toISOString().slice(0,16) : '';
   document.getElementById('adminArticleTitleInput').value = item.title || '';
@@ -6894,13 +6900,14 @@ function adminEditorPayload(status){
   const fullText = document.getElementById('adminArticleBody')?.value.trim() || '';
   const category = document.getElementById('adminArticleCategory')?.value || 'politica';
   const placement = document.getElementById('adminArticlePlacement')?.value || 'normal';
+  const showHome = !!document.getElementById('adminArticleHome')?.checked;
   const scheduledLocal = document.getElementById('adminArticleSchedule')?.value || '';
   const titleFont=document.getElementById('adminArticleTitleFont')?.value||'default';
   const summaryFont=document.getElementById('adminArticleSummaryFont')?.value||'default';
   const bodyFont=document.getElementById('adminArticleBodyFont')?.value||'default';
 
   return {
-    title,summary,fullText,category,placement,status,titleFont,summaryFont,bodyFont,
+    title,summary,fullText,category,placement,showHome,status,titleFont,summaryFont,bodyFont,
     scheduledAt: scheduledLocal ? new Date(scheduledLocal).toISOString() : ''
   };
 }
@@ -6955,6 +6962,7 @@ function syncManualArticlesIntoFeeds(){
 
   try{
     renderLatestNewsBar?.();
+    renderManualHomeFeature?.();
   }catch(_e){}
 }
 
@@ -7004,6 +7012,7 @@ async function saveAdminArticle(status){
     image:adminEditingImageData || item.image || '',
     status,
     placement:payload.placement,
+    showHome:payload.showHome,
     scheduledAt: status === 'scheduled' ? payload.scheduledAt : '',
     gallery:normalizeGalleryItems(adminGalleryItems),
     updatedAt:now
@@ -7218,13 +7227,7 @@ document.getElementById('adminAddGalleryImageBtn')?.addEventListener('click',()=
 });
 
 document.getElementById('adminUploadGalleryVideoBtn')?.addEventListener('click',()=>{
-  const input=document.getElementById('adminGalleryVideoInput');
-  const status=document.getElementById('adminEditorStatus');
-  if(status) status.textContent='Escolha um vídeo da galeria do aparelho…';
-  if(input){
-    input.removeAttribute('capture');
-    input.click();
-  }
+  document.getElementById('adminGalleryVideoInput')?.click();
 });
 
 document.getElementById('adminAddGalleryVideoBtn')?.addEventListener('click',addGalleryVideo);
@@ -7237,57 +7240,15 @@ document.getElementById('adminGalleryImageInput')?.addEventListener('change',asy
 document.getElementById('adminGalleryVideoInput')?.addEventListener('change',async(e)=>{
   const file = e.target.files?.[0];
   e.target.value='';
-  if(!file){
-    const status=document.getElementById('adminEditorStatus');
-    if(status) status.textContent='Nenhum vídeo selecionado.';
-    return;
-  }
+  if(!file) return;
 
   const status = document.getElementById('adminEditorStatus');
-  const pendingId='pending-'+Date.now();
-
-  adminGalleryItems.push({
-    type:'video-file',
-    uploaded:true,
-    url:'',
-    caption:'',
-    mime:file.type || '',
-    name:'Enviando: '+(file.name || 'vídeo'),
-    position:'end',
-    width:'full',
-    align:'center',
-    _pendingId:pendingId
-  });
-  renderAdminGallery();
-
   try{
     await uploadGalleryVideo(file);
-
-    // Remove the temporary "enviando" row after the real item is inserted.
-    adminGalleryItems = adminGalleryItems.filter(x=>x._pendingId!==pendingId);
-    renderAdminGallery();
-
-    if(status) status.textContent='Vídeo pronto. Salve ou publique a matéria.';
   }catch(err){
-    adminGalleryItems = adminGalleryItems.filter(x=>x._pendingId!==pendingId);
-    renderAdminGallery();
-
     console.error('Upload de vídeo:',err);
-    const raw=String(err?.message || err || 'erro desconhecido');
-    let msg=raw;
-
-    if(/bucket.*not found|not found/i.test(raw)){
-      msg='O armazenamento de vídeos não foi encontrado no Supabase. Verifique se o bucket article-videos foi criado.';
-    }else if(/row-level security|policy|permission|unauthorized|403/i.test(raw)){
-      msg='O Supabase bloqueou o upload do vídeo. As permissões do bucket article-videos precisam ser corrigidas.';
-    }else if(/mime|content.?type|type.*not allowed/i.test(raw)){
-      msg='Esse formato de vídeo foi bloqueado pelo Supabase. Tente MP4 ou ajuste os formatos permitidos do bucket.';
-    }else if(/maximum|too large|size/i.test(raw)){
-      msg='O vídeo ultrapassa o limite permitido. Tente um arquivo menor.';
-    }
-
-    if(status) status.textContent = msg;
-    alert('Não foi possível enviar o vídeo.\n\n' + msg);
+    if(status) status.textContent = err?.message || 'Erro ao enviar o vídeo.';
+    alert('Não foi possível enviar o vídeo: ' + (err?.message || 'erro desconhecido'));
   }
 });
 
@@ -7385,6 +7346,7 @@ function openManualArticle(item){
 
   clearNavActiveStates();
   const navMap = {
+    rondonia:'navRondonia',
     politica:'navPolitica',economia:'navEconomia',mundo:'navMundo',
     tecnologia:'navTecnologia',esportes:'navEsportes'
   };
@@ -7551,6 +7513,7 @@ async function publishManualArticle(){
   await saveManualArticles();
 
   // Insere imediatamente na lista correspondente.
+  if(category==='rondonia') { /* editoria manual: lida diretamente de manualArticles */ }
   if(category==='politica') politicsNewsItems=mergeManualWithCategory(category,politicsNewsItems);
   if(category==='economia') economyNewsItems=mergeManualWithCategory(category,economyNewsItems);
   if(category==='mundo') worldNewsItems=mergeManualWithCategory(category,worldNewsItems);
@@ -8379,6 +8342,7 @@ function goToNewsPage(key, page){
 }
 
 function editorialOpenExpression(key, index){
+  if(key === 'rondonia') return `openManualArticle(manualForCategory('rondonia')[${index}])`;
   if(key === 'politica') return `openPoliticsArticle(${index})`;
   if(key === 'economia') return `openEconomyArticle(${index})`;
   if(key === 'mundo') return `openWorldArticle(${index})`;
@@ -8479,6 +8443,7 @@ function renderEditorialCategory(key, items, page=null){
 
 function liveAllItems(){
   const collections = [
+    {key:'rondonia',label:'Rondônia',items:manualForCategory('rondonia')},
     {key:'politica',label:'Política',items:politicsNewsItems || []},
     {key:'economia',label:'Economia',items:economyNewsItems || []},
     {key:'mundo',label:'Mundo',items:worldNewsItems || []},
@@ -8506,6 +8471,7 @@ function liveAllItems(){
 }
 
 function liveOpenExpr(item){
+  if(item._category === 'rondonia') return `openManualArticle(liveCategoryItems('rondonia')[${item._index}])`;
   if(item._category === 'politica') return `openPoliticsArticle(${item._index})`;
   if(item._category === 'economia') return `openEconomyArticle(${item._index})`;
   if(item._category === 'mundo') return `openWorldArticle(${item._index})`;
@@ -8523,6 +8489,7 @@ function liveImage(item, cls=''){
 
 function liveCategoryItems(key){
   const map = {
+    rondonia: manualForCategory('rondonia'),
     politica: politicsNewsItems || [],
     economia: economyNewsItems || [],
     mundo: worldNewsItems || [],
@@ -8534,6 +8501,7 @@ function liveCategoryItems(key){
 
 function liveCategoryLabel(key){
   return {
+    rondonia:'Rondônia',
     politica:'Política',
     economia:'Economia',
     mundo:'Mundo',
@@ -8660,7 +8628,7 @@ function renderLivePortal(){
     return `<li><a href="#noticia-${it._category}" onclick="return ${open}">${escHtml(it.title)}</a></li>`;
   }).join('');
 
-  const categorySections = ['politica','economia','mundo','tecnologia','esportes']
+  const categorySections = ['rondonia','politica','economia','mundo','tecnologia','esportes']
     .map(liveCategoryBlockHtml)
     .join('');
 
@@ -9122,7 +9090,7 @@ function hideElectionsSubnav(){
 }
 
 function clearNavActiveStates(){
-  ['navAoVivo','navPolitica','navEconomia','navMundo','navTecnologia','navVideos'].forEach(id => document.getElementById(id)?.classList.remove('active-view'));
+  ['navAoVivo','navRondonia','navPolitica','navEconomia','navMundo','navTecnologia','navVideos'].forEach(id => document.getElementById(id)?.classList.remove('active-view'));
 }
 
 let categoryPageSeq = 0;
@@ -9174,6 +9142,13 @@ async function renderCategoryNews(key){
   const mySeq = ++categoryPageSeq;
   noteEl.textContent = 'atualizando…';
   try{
+    if(key === 'rondonia') {
+      const items = manualForCategory('rondonia');
+      if(mySeq !== categoryPageSeq) return;
+      renderEditorialCategory('rondonia', items);
+      noteEl.textContent = items.length ? 'atualizado às ' + new Date().toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'}) : 'Nenhuma matéria publicada em Rondônia ainda.';
+      return;
+    }
     if(key === 'politica') {
       const items = await fetchPoliticsNews(true);
       if(mySeq !== categoryPageSeq) return;
@@ -10289,35 +10264,45 @@ function showVideosPage(updateHash=true){
 }
 
 
-window.addEventListener('hashchange', () => {
-  const hashKey = location.hash.replace('#','');  if(hashKey === 'videos') showVideosPage(false);
-  else if(hashKey === 'politica/candidaturas') showPoliticsElectionSection('candidaturas', false);
-  else if(hashKey === 'politica/brasil-em-numeros') showPoliticsElectionSection('numeros', false);
-  else if(hashKey === 'politica/indice-eleitoral') showPoliticsElectionSection('indice', false);
-  else if(hashKey === 'esportes/futebol') showSportsSection('futebol', false);
-  else if(hashKey === 'esportes/libertadores') showSportsSection('libertadores', false);
-  else if(hashKey === 'esportes/copa-do-brasil') showSportsSection('copa-do-brasil', false);
-  else if(hashKey === 'esportes/sul-americana') showSportsSection('sul-americana', false);
-  else if(hashKey === 'esportes/automobilismo') showSportsSection('automobilismo', false);
-  else if(hashKey === 'esportes/tenis') showSportsSection('tenis', false);
-  else if(hashKey === 'esportes/futebol-mundial') showSportsSection('futebol-mundial', false);
-  else if(hashKey === 'esportes/brasileirao' || hashKey === 'esportes') showSportsSection('brasileirao', false);
-  else if(CATEGORY_CONFIG[hashKey]) showCategoryPage(hashKey); // suporta link direto para uma categoria
-  setInterval(loadBCB, 5*60*1000);
-  setInterval(loadStocks, 60*1000);
-  setInterval(loadWeather, 15*60*1000);
-  setInterval(loadTicker, 5*60*1000);
-  setInterval(loadSportsNews, 30*1000);
-  setInterval(() => { if(document.getElementById('videosMain')?.style.display !== 'none') loadYoutubeVideos(true); }, 10*60*1000);
-  setInterval(() => loadWorldNews(true), 2*60*1000);
-  setInterval(() => loadTechnologyNews(true), 2*60*1000);
-  setInterval(() => { if(document.getElementById('liveNewsMain')?.style.display !== 'none') renderLivePortal(); }, 60*1000);
-  setInterval(() => { if(sportsPageBooted && document.getElementById('sportsMain').style.display !== 'none') sportsRenderView(); }, 30*1000);
-  setInterval(() => {
-    const key = location.hash.replace('#', '');
-    if(CATEGORY_CONFIG[key] && document.getElementById('categoryMain').style.display !== 'none') renderCategoryNews(key);
-  }, 3*60*1000);
-})();
+function routeCurrentHash(){
+  const hashKey = location.hash.replace('#','');
+  if(hashKey.startsWith('materia/')) return manualArticleFromHash();
+  if(hashKey === 'videos') return showVideosPage(false);
+  if(hashKey === 'ao-vivo' || !hashKey) return showLivePage();
+  if(hashKey === 'politica/candidaturas') return showPoliticsElectionSection('candidaturas', false);
+  if(hashKey === 'politica/brasil-em-numeros') return showPoliticsElectionSection('numeros', false);
+  if(hashKey === 'politica/indice-eleitoral') return showPoliticsElectionSection('indice', false);
+  if(hashKey === 'esportes/futebol') return showSportsSection('futebol', false);
+  if(hashKey === 'esportes/libertadores') return showSportsSection('libertadores', false);
+  if(hashKey === 'esportes/copa-do-brasil') return showSportsSection('copa-do-brasil', false);
+  if(hashKey === 'esportes/sul-americana') return showSportsSection('sul-americana', false);
+  if(hashKey === 'esportes/automobilismo') return showSportsSection('automobilismo', false);
+  if(hashKey === 'esportes/tenis') return showSportsSection('tenis', false);
+  if(hashKey === 'esportes/futebol-mundial') return showSportsSection('futebol-mundial', false);
+  if(hashKey === 'esportes/brasileirao' || hashKey === 'esportes') return showSportsSection('brasileirao', false);
+  if(CATEGORY_CONFIG[hashKey]) return showCategoryPage(hashKey);
+  showLivePage();
+}
+
+window.addEventListener('hashchange', routeCurrentHash);
+
+setInterval(loadBCB, 5*60*1000);
+setInterval(loadStocks, 60*1000);
+setInterval(loadWeather, 15*60*1000);
+setInterval(loadTicker, 5*60*1000);
+setInterval(loadSportsNews, 30*1000);
+setInterval(() => { if(document.getElementById('videosMain')?.style.display !== 'none') loadYoutubeVideos(true); }, 10*60*1000);
+setInterval(() => loadWorldNews(true), 2*60*1000);
+setInterval(() => loadTechnologyNews(true), 2*60*1000);
+setInterval(() => { if(document.getElementById('liveNewsMain')?.style.display !== 'none') renderLivePortal(); }, 60*1000);
+setInterval(() => { if(sportsPageBooted && document.getElementById('sportsMain').style.display !== 'none') sportsRenderView(); }, 30*1000);
+setInterval(() => {
+  const key = location.hash.replace('#', '');
+  if(CATEGORY_CONFIG[key] && document.getElementById('categoryMain').style.display !== 'none') renderCategoryNews(key);
+}, 3*60*1000);
+
+// Sem Home: Ao Vivo é a página inicial do portal.
+setTimeout(routeCurrentHash, 0);
 
 
 // Carrega o histórico compartilhado de até 5 meses após a inicialização.
