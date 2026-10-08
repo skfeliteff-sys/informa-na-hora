@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Informa na Hora — Notícias em tempo real</title>
+<title>Painel Administrativo — Informa na Hora</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600;9..144,700;9..144,900&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -2960,8 +2960,51 @@
 </style>
 <style>
 .migration-ads{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:20px;margin:20px 0}.migration-ad{max-width:100%;text-align:center;overflow:hidden}.migration-ad.wide{flex-basis:100%}.migration-ad img{display:block;max-width:100%;height:auto;margin:auto}.migration-ad ins{display:block;max-width:100%;overflow:auto}#categoryArticleSummary img{max-width:100%;height:auto}#categoryArticleSummary iframe{max-width:100%}#migrationSponsors{margin:30px auto}
-</style></head>
-<body class=\"admin-page\">
+</style><style>
+/* Ao vivo compacto e publicidade no topo — 08/10/2026 */
+#liveBroadcast{max-width:640px;margin:18px auto 28px;border:1px solid var(--line);border-radius:6px;overflow:hidden;background:var(--ink);color:var(--paper)}
+.live-broadcast-head{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;font-family:var(--font-mono);font-size:12px}
+.live-broadcast-head strong{color:var(--amber)}
+#liveBroadcastScreen{aspect-ratio:16/9;background:#101318;display:grid;place-items:center}
+#liveBroadcastScreen iframe{display:block;width:100%;height:100%;border:0}
+.live-broadcast-empty{padding:24px;text-align:center;font-size:14px;color:#c9cdd2}
+#liveBroadcastLink{font-size:11px;text-decoration:underline}
+#migrationSponsors{margin:14px auto 18px}
+#migrationSponsors .section-head{margin:0 0 8px;border-bottom:1px solid var(--line);padding-bottom:6px}
+#migrationSponsors .section-head h2{font-family:var(--font-mono);font-size:11px;text-transform:uppercase;letter-spacing:.06em}
+.migration-ad-controls{display:flex;gap:6px}.migration-ad-controls button{border:1px solid var(--line);background:var(--paper);border-radius:4px;padding:3px 10px;cursor:pointer;color:var(--ink)}
+#migrationSponsors .migration-ads{display:flex;flex-wrap:nowrap;justify-content:flex-start;overflow-x:auto;gap:16px;margin:0;padding-bottom:8px;align-items:center;scroll-snap-type:x proximity}
+#migrationSponsors .migration-ad,#migrationSponsors .migration-ad.wide{flex:0 0 auto;max-width:100%;scroll-snap-align:start}
+#migrationSponsors .migration-ad img{height:auto;width:auto;max-height:150px;max-width:min(728px,80vw)}
+#adminLiveSettings{padding:12px;border:1px solid var(--line);margin:12px 0}
+#adminLiveSettings input{width:100%;padding:10px;margin:8px 0;border:1px solid var(--line);border-radius:4px}
+@media(max-width:640px){#liveBroadcast{max-width:100%}#migrationSponsors .migration-ad img{max-height:110px}}
+</style><style>
+/* Interface baseada no painel de referência do proprietário. */
+body.admin-page{background:#edeef2;color:#454c54;font:14px/1.42857143 'Helvetica Neue',Helvetica,Arial,sans-serif;--font-display:'Helvetica Neue',Helvetica,Arial,sans-serif;--font-body:'Helvetica Neue',Helvetica,Arial,sans-serif;--font-mono:'Helvetica Neue',Helvetica,Arial,sans-serif;--paper:#edeef2;--line:#ddd;--amber:#3498db}
+body.admin-page .admin-mobile-brand{display:none}
+body.admin-page>.utility,body.admin-page>#migrationSponsors,body.admin-page>.ticker,body.admin-page>#latestNewsBar{display:none!important}
+body.admin-page #adminPreviewModal{z-index:100001}
+.hf-nav [hidden]{display:none!important}
+body.admin-page .admin-dashboard{padding:0;background:#edeef2;overflow:auto}
+body.admin-page .admin-dashboard-shell{width:100%;margin:0;border:0;border-radius:0;box-shadow:none;min-height:100vh;padding-left:200px;background:#edeef2}
+.hf-sidebar{position:fixed;inset:0 auto 0 0;width:200px;overflow-y:auto;background:#f5f5f5;border-right:1px solid #e5e5e5;z-index:3;color:#454c54}
+.hf-brand{height:60px;background:linear-gradient(110deg,#aaa 28%,#929292 28%,#929292 65%,#707070 65%);display:flex;align-items:center;justify-content:center;font-size:20px;color:white;font-weight:700}.hf-brand sup{font-size:9px;margin:-13px 0 0 3px}
+.hf-account{text-align:center;padding:15px 10px 25px;font-size:14px}.hf-account img{width:100px;height:100px;object-fit:cover;border-radius:50%;margin:0 auto 12px}.hf-account small{display:block;font-size:12px;margin-top:4px;color:#777}
+.hf-nav button,.hf-nav a{display:flex;align-items:center;gap:10px;width:100%;padding:12px 15px;min-height:40px;border:0;border-left:4px solid transparent;background:transparent;color:inherit;font:14px Arial,sans-serif;text-align:left;cursor:pointer;text-decoration:none}.hf-nav button:hover,.hf-nav a:hover{background:#fff;color:#06f}.hf-nav .active{background:white;border-left-color:#06f}.hf-nav i{font-style:normal;width:16px;text-align:center}.hf-nav .hf-group{display:block;padding:24px 15px 12px;color:#999;text-transform:uppercase;font-size:12px}.hf-nav .hf-sub{padding-left:29px;background:#fafafa;color:#555}.hf-nav .hf-sub::before{content:'›';color:#aaa}.hf-nav .hf-external{margin-left:auto;font-size:10px;color:#999}.hf-new{font-size:10px;color:#fff;background:#48c51f;padding:2px 4px}
+.hf-topbar{height:60px;background:#292929;display:flex;justify-content:space-between;align-items:center;padding:0 25px;color:white}.hf-topbar button{border:0;color:#fff;background:none;font-size:19px;padding:10px;cursor:pointer}.hf-topbar img{width:45px;height:45px;object-fit:contain}.hf-topbar a{font-size:12px;color:#fff}
+.hf-breadcrumb{height:64px;background:#f5f5f5;display:flex;align-items:center;gap:7px;padding:0 40px;color:#454c54;border-bottom:1px solid #e5e5e5}.hf-breadcrumb button{border:0;background:none;color:#06f;cursor:pointer;font:14px Arial;padding:0}.hf-breadcrumb span{color:#aaa}
+.hf-content{padding:25px}.hf-title{font:700 36px/1.1 'Helvetica Neue',Arial,sans-serif;color:#565656;margin:5px 0 25px}.hf-title:after{content:'';display:block;width:70px;height:5px;background:#343942;margin-top:15px}
+.hf-pane[hidden],.hf-row[hidden],.hf-form[hidden]{display:none!important}.hf-banner-grid{display:grid;grid-template-columns:minmax(0,2fr) minmax(260px,1fr);gap:30px}.hf-form h4{font-size:18px;line-height:1.1;font-weight:700;color:#06f;margin:0 0 14px}.hf-form h4.hf-section-title{margin-top:35px}.hf-row{display:grid;grid-template-columns:25% 75%;margin:0 -15px 15px;align-items:start}.hf-row>label{padding:7px 15px 0;text-align:right;font-weight:700}.hf-row>div{padding:0 15px;min-width:0}.hf-row input:not([type=checkbox]):not([type=file]),.hf-row select,.hf-row textarea{font:16px Arial;color:#454c54;background:#fff;width:100%;border:1px solid #ccc;border-radius:0;padding:6px 12px;min-height:34px;box-shadow:inset 0 1px 1px #00000013}.hf-row input:disabled{background:#ecf0f1!important}.hf-row input[type=file]{max-width:100%;font-size:14px;padding-top:5px}.hf-row textarea{min-height:150px}.hf-row small{display:block;color:#777;margin-top:6px}.hf-row input:focus,.hf-row select:focus,.hf-row textarea:focus{outline:2px solid #66afe9;outline-offset:1px}.hf-row input[type=checkbox]{margin:10px 7px 0 0}
+.hf-button{background:#3498db;color:white;border:1px solid #258cd1;border-radius:0;padding:10px 15px;font:16px/1.4 Arial;cursor:pointer;display:inline-block;text-decoration:none}.hf-button:hover{background:#2384c6}.hf-button:disabled{opacity:.6;cursor:wait}.hf-button.secondary{background:#fff;color:#454c54;border-color:#ccc}.hf-card{background:#fff;margin-bottom:20px;box-shadow:0 2px 2px #0000000d;border:1px solid #eee}.hf-card h3{padding:12px 15px;background:#f5f5f5;font-size:16px;border-bottom:1px solid #eee}.hf-card>div{padding:15px}.hf-card p{margin:0 0 10px}.hf-card img{width:100%;height:auto}.hf-notice{padding:15px;background:#e7f2fb;color:#276083;margin-bottom:20px}.hf-notice:empty{display:none}.hf-notice.success{background:#27ae60;color:white}.hf-notice.error{background:#fbe5e3;color:#a32620}.hf-table-wrap{overflow-x:auto;background:#fff}.hf-table{border-collapse:collapse;width:100%;font-size:14px}.hf-table th,.hf-table td{padding:12px 10px;border:1px solid #ddd;text-align:left}.hf-table th{background:#f5f5f5}.hf-table tbody tr:nth-child(even){background:#f9f9f9}.hf-table button{padding:6px 10px;font-size:13px}.hf-list-tools{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:20px}.hf-list-tools input{padding:10px;border:1px solid #ccc;min-width:0;width:min(340px,100%)}.hf-preview img,.hf-preview video,.hf-preview iframe{max-width:100%;border:0}.hf-preview{overflow:hidden}.hf-layout-map{border:1px solid #ddd;padding:10px;background:#fafafa;text-align:center}.hf-layout-map>div{padding:10px;background:white;border:1px solid #ddd;margin:8px 0;font-size:12px}.hf-layout-map .ad{background:#3498db;color:white;border:0}.hf-muted{color:#777;font-size:12px}
+body.admin-page .admin-dashboard-head{background:transparent;color:#454c54;padding:0 0 20px}body.admin-page .admin-dashboard-head>div:first-child,body.admin-page #adminDashboardCloseBtn,body.admin-page #adminDashboardLogoutBtn{display:none}body.admin-page .admin-dashboard-head button{font-size:14px;background:#3498db;color:white;border-color:#298ac7;border-radius:0;font-weight:400}body.admin-page .admin-dashboard-head button:not(.primary){background:white;color:#454c54;border-color:#ccc}body.admin-page .admin-dashboard-body{grid-template-columns:330px minmax(0,1fr);gap:25px;min-height:0}body.admin-page .admin-editor{padding:20px;background:#fff;border:1px solid #ddd}body.admin-page .admin-library{border:1px solid #ddd}body.admin-page .admin-article-list{max-height:900px}body.admin-page .admin-article-row{border-radius:0}body.admin-page .admin-form-field input,body.admin-page .admin-form-field select,body.admin-page .admin-form-field textarea{border-radius:0;background:#fff;border-color:#ccc;font-family:Arial}body.admin-page .admin-stat{background:#f5f5f5;border-radius:0}body.admin-page #migrationAdminTools,body.admin-page #adminLiveSettings{display:none}body.admin-page .admin-editor h3{color:#06f}body.admin-page .admin-stats{grid-template-columns:repeat(3,1fr)}
+body.admin-page #stealthAdminModal{background:#edeef2}body.admin-page .admin-dialog{background:white;border-radius:0;box-shadow:0 2px 12px #0002;border:1px solid #ddd;max-width:420px}body.admin-page .admin-dialog h2{font-family:Arial;color:#565656}body.admin-page .admin-submit{background:#3498db;color:white;border:0;border-radius:0}body.admin-page .admin-dialog input{border-radius:0}body.admin-page #stealthAdminClose{display:none}
+@media(max-width:1100px){.hf-banner-grid{grid-template-columns:1fr}.hf-banner-info{display:grid;grid-template-columns:1fr 1fr;gap:20px}.hf-row{grid-template-columns:28% 72%}body.admin-page .admin-dashboard-body{grid-template-columns:290px minmax(0,1fr)}}
+@media(max-width:767px){body.admin-page .admin-dashboard-shell{padding-left:0}.hf-sidebar{transform:translateX(-100%);transition:transform .2s;width:200px;top:60px;box-shadow:3px 0 10px #0002}.hf-menu-open .hf-sidebar{transform:translateX(0)}.hf-topbar{position:sticky;top:0;z-index:4}.hf-breadcrumb{padding:0 25px}.hf-content{padding:25px}.hf-title{font-size:36px}.hf-row{display:block;margin:0 0 15px}.hf-row>label{display:block;text-align:left;padding:0 0 6px}.hf-row>div{padding:0}.hf-banner-grid{display:block}.hf-banner-info{display:block;margin-top:30px}.hf-form h4.hf-section-title{margin-top:36px}body.admin-page .admin-dashboard-body{grid-template-columns:1fr}body.admin-page .admin-article-list{max-height:400px}.hf-list-tools{align-items:stretch;flex-direction:column}.hf-breadcrumb{height:64px}.hf-topbar a{font-size:10px}}
+
+</style>
+</head>
+<body class="admin-page">
 <div class="admin-mobile-brand" id="adminMobileBrand">
   <strong>Informa na Hora · Administração</strong>
   <a href="index.html">Ver site</a>
@@ -3016,6 +3059,7 @@
     </div>
   </div>
 </header>
+<section class="wrap" id="migrationSponsors" aria-label="Publicidade"></section>
 
 <nav class="elections-top-subnav" id="electionsTopSubnav" aria-label="Submenu de Eleições" style="display:none!important">
   <div class="wrap">
@@ -3611,6 +3655,10 @@
     <h1>Ao Vivo</h1>
     <div class="live-status">Atualizando em tempo real</div>
   </div>
+    <section id="liveBroadcast" aria-label="Transmissão ao vivo">
+    <div class="live-broadcast-head"><strong>TV INFORMA NA HORA · AO VIVO</strong><a id="liveBroadcastLink" hidden target="_blank" rel="noopener">Abrir transmissão ↗</a></div>
+    <div id="liveBroadcastScreen"><p class="live-broadcast-empty">Transmissão ainda não configurada.</p></div>
+  </section>
   <div id="livePortalBody">
     <p class="sports-loading">Carregando as notícias mais recentes…</p>
   </div>
@@ -3878,7 +3926,6 @@
   </div>
 </main>
 
-<section class="wrap" id="migrationSponsors" aria-label="Publicidade"></section>
 <footer>
   <div class="wrap footer-top">
     <a class="logo" href="#ao-vivo" onclick="showLivePage(); return false;">
@@ -4212,25 +4259,23 @@ async function migrationSaveBanners(){
   await window.storage.set('site:migrated-banners',JSON.stringify(migrationBanners));
 }
 async function migrationRenderBanners(){
-  try{const r=await window.storage.get('site:migrated-banners');if(r?.value)migrationBanners=JSON.parse(r.value);}catch(e){console.warn('Publicidade: usando cópia incorporada',e);}
+  try{const r=await window.storage.get('site:migrated-banners');if(r?.value){const parsed=JSON.parse(r.value);if(Array.isArray(parsed))migrationBanners=parsed;}}catch(e){console.warn('Publicidade: usando cópia incorporada',e);}
   const slot=document.getElementById('migrationSponsors');if(!slot)return;
-  slot.innerHTML='<div class="section-head"><h2>Publicidade</h2></div><div class="migration-ads"></div>';
-  const grid=slot.lastElementChild;
-  for(const b of migrationBanners.filter(x=>!x.disabled)){
-    const box=document.createElement('div');box.className='migration-ad';
-    if(b.image){
-      const a=document.createElement('a');a.href=b.link;a.target='_blank';a.rel='noopener sponsored';
-      const im=document.createElement('img');im.src=b.image;im.alt=b.name||'Publicidade';im.width=Number(b.width)||300;im.height=Number(b.height)||300;a.append(im);box.append(a);
-      if(Number(b.width)>Number(b.height)*2)box.classList.add('wide');
-    }else if(b.zone){
-      const ins=document.createElement('ins');ins.setAttribute('data-revive-zoneid',b.zone);ins.setAttribute('data-revive-id',b.reviveId);box.append(ins);
-    }
-    grid.append(box);
+  slot.innerHTML='<div class="section-head"><h2>Publicidade</h2><div class="migration-ad-controls"><button type="button" aria-label="Anúncios anteriores">←</button><button type="button" aria-label="Próximos anúncios">→</button></div></div><div class="migration-ads"></div>';
+  const grid=slot.lastElementChild;const buttons=slot.querySelectorAll('button');buttons[0].onclick=()=>grid.scrollBy({left:-320,behavior:'smooth'});buttons[1].onclick=()=>grid.scrollBy({left:320,behavior:'smooth'});
+  const safeLink=value=>{try{const u=new URL(value,location.href);return ['https:','http:'].includes(u.protocol)?u.href:'';}catch{return '';}};
+  const safeMedia=value=>/^data:(image\/(png|jpeg|gif|webp)|video\/(mp4|webm));base64,/i.test(value||'')?value:safeLink(value||'');
+  for(const b of migrationBanners.filter(x=>!x.disabled).slice().sort((a,b)=>(Number(a.order)||1)-(Number(b.order)||1))){
+    const box=document.createElement('div');box.className='migration-ad';const width=Number(b.width)||300,height=Number(b.height)||300;
+    if(b.type==='html'&&b.html&&!b.zone){const frame=document.createElement('iframe');frame.title=b.name||'Publicidade';frame.setAttribute('sandbox','allow-scripts allow-popups allow-popups-to-escape-sandbox');frame.referrerPolicy='no-referrer';frame.width=width;frame.height=height;frame.style.cssText='border:0;max-width:100%';frame.srcdoc=b.html;box.append(frame);}
+    else if(b.type==='video'&&b.videoUrl){const video=document.createElement('video');video.src=safeMedia(b.videoUrl);video.controls=true;video.playsInline=true;video.preload='metadata';video.width=width;video.height=height;video.style.maxWidth='100%';box.append(video);if(safeLink(b.link)){const a=document.createElement('a');a.href=safeLink(b.link);a.target='_blank';a.rel='noopener sponsored';a.textContent='Visitar anunciante';box.append(a);}}
+    else if(b.image||b.imageUrl){const a=document.createElement('a');const destination=safeLink(b.link);if(destination)a.href=destination;a.target='_blank';a.rel='noopener sponsored';const im=document.createElement('img');im.src=safeMedia(b.image||b.imageUrl);im.alt=b.name||'Publicidade';im.width=width;im.height=height;if(b.imageUrl&&b.imageUrl!==b.image)im.onerror=()=>{im.onerror=null;im.src=safeMedia(b.imageUrl);};a.append(im);box.append(a);}
+    else if(b.zone){const ins=document.createElement('ins');ins.setAttribute('data-revive-zoneid',b.zone);ins.setAttribute('data-revive-id',b.reviveId);box.append(ins);}
+    if(width>height*2)box.classList.add('wide');grid.append(box);
   }
-  if(migrationBanners.some(x=>x.zone&&!x.disabled)){
-    const sc=document.createElement('script');sc.async=true;sc.src='https://adserve.pen6.cc/www/delivery/asyncantifraudjs.php';slot.append(sc);
-  }
+  if(migrationBanners.some(x=>x.zone&&!x.disabled)){const sc=document.createElement('script');sc.async=true;sc.src='https://adserve.pen6.cc/www/delivery/asyncantifraudjs.php';slot.append(sc);}
 }
+
 function migrationAdminPanel(){
   const host=document.getElementById('adminArticleList');if(!host||document.getElementById('migrationAdminTools'))return;
   const box=document.createElement('details');box.id='migrationAdminTools';box.style.cssText='padding:12px;border:1px solid var(--line);margin:12px 0';
@@ -10497,5 +10542,102 @@ setInterval(()=>processScheduledArticles(),30000);
 
 </script>
 
+<script>
+// O endereço original não consta nos arquivos recebidos. Configuração compartilhada pelo painel.
+const LIVE_PLAYER_DEFAULT_URL = '';
+function normalizeLivePlayerUrl(raw){
+  raw=String(raw||'').trim();
+  if(raw.startsWith('<')){const doc=new DOMParser().parseFromString(raw,'text/html');raw=doc.querySelector('iframe')?.getAttribute('src')||'';}
+  if(!raw)return '';
+  const u=new URL(raw);
+  if(u.protocol!=='https:')throw new Error('Use o endereço HTTPS do player ou o código iframe.');
+  const host=u.hostname.replace(/^www\./,'');
+  if(host==='youtu.be'){const id=u.pathname.slice(1);if(!/^[\w-]{11}$/.test(id))throw new Error('Link do YouTube inválido.');return 'https://www.youtube.com/embed/'+id;}
+  if(host==='youtube.com'||host==='m.youtube.com'){
+    const parts=u.pathname.split('/').filter(Boolean);const id=u.searchParams.get('v')||(['live','shorts'].includes(parts[0])?parts[1]:'');
+    if(id&&/^[\w-]{11}$/.test(id))return 'https://www.youtube.com/embed/'+id;
+    if(parts[0]!=='embed')throw new Error('Cole o link de uma transmissão específica do YouTube ou seu iframe.');
+  }
+  return u.href;
+}
+let livePlayerUrl=LIVE_PLAYER_DEFAULT_URL;
+function renderLiveBroadcast(){
+  const screen=document.getElementById('liveBroadcastScreen');const link=document.getElementById('liveBroadcastLink');if(!screen)return;
+  screen.replaceChildren();link.hidden=!livePlayerUrl;
+  if(!livePlayerUrl){const p=document.createElement('p');p.className='live-broadcast-empty';p.textContent='Transmissão ainda não configurada.';screen.append(p);return;}
+  const frame=document.createElement('iframe');frame.src=livePlayerUrl;frame.title='TV Informa na Hora — transmissão ao vivo';frame.allow='autoplay; encrypted-media; fullscreen; picture-in-picture';frame.allowFullscreen=true;frame.referrerPolicy='strict-origin-when-cross-origin';screen.append(frame);link.href=livePlayerUrl;
+}
+async function loadLiveBroadcast(){
+  try{const r=await window.storage.get('site:liveplayer');if(r?.value)livePlayerUrl=normalizeLivePlayerUrl(JSON.parse(r.value).url||'');}catch(e){console.warn('Não foi possível carregar o endereço da transmissão.',e);}
+  renderLiveBroadcast();const input=document.getElementById('adminLivePlayerUrl');if(input)input.value=livePlayerUrl;
+}
+function addLiveSettings(){
+  const host=document.getElementById('adminArticleList');if(!host||document.getElementById('adminLiveSettings'))return;
+  const box=document.createElement('details');box.id='adminLiveSettings';box.innerHTML='<summary>Transmissão ao vivo</summary><label for="adminLivePlayerUrl">Link HTTPS do player, vídeo ao vivo do YouTube ou código iframe</label><input id="adminLivePlayerUrl" type="text" placeholder="Cole aqui o endereço da transmissão"><button type="button" id="adminSaveLivePlayer">Salvar transmissão</button><p id="adminLivePlayerStatus" role="status"></p>';
+  host.before(box);box.querySelector('input').value=livePlayerUrl;
+  box.querySelector('button').onclick=async()=>{
+    if(!requireAdmin())return;
+    const status=document.getElementById('adminLivePlayerStatus');const button=box.querySelector('button');button.disabled=true;
+    try{if(!siteSupabase)throw new Error('Supabase indisponível.');const url=normalizeLivePlayerUrl(box.querySelector('input').value);await window.storage.set('site:liveplayer',JSON.stringify({url}));livePlayerUrl=url;renderLiveBroadcast();status.textContent='Transmissão salva para todos os visitantes.';}catch(e){status.textContent=e.message;}finally{button.disabled=false;}
+  };
+}
+document.addEventListener('DOMContentLoaded',()=>{addLiveSettings();loadLiveBroadcast();});
+</script>
+<script>
+/* Mantém as rotinas editoriais e o armazenamento já configurados. */
+document.addEventListener('DOMContentLoaded',()=>{
+  const $=id=>document.getElementById(id);
+  const shell=document.querySelector('.admin-dashboard-shell');
+  const head=document.querySelector('.admin-dashboard-head');
+  const editorial=document.querySelector('.admin-dashboard-body');
+  const old='https://informanahora.com.br/hf-admin/';
+  const menuLink=(label,path,icon)=>`<a href="${old+path}" target="_blank" rel="noopener" title="Abrir ${label} no painel antigo"><i aria-hidden="true">${icon}</i>${label}<span class="hf-external" aria-label="Painel antigo">↗</span></a>`;
+  const sidebar=document.createElement('aside'); sidebar.className='hf-sidebar';sidebar.setAttribute('aria-label','Menu administrativo');
+  sidebar.innerHTML=`<div class="hf-brand">VUPLER<sup>v4.0.3</sup></div><div class="hf-account"><img src="assets/admin-modelo/avatar.gif" alt="Informa na Hora"><strong>Informa na Hora Rádio e TV</strong><small>⌖ Porto Velho - Rondônia</small></div><nav class="hf-nav"><button data-view="posts"><i>⌂</i>Painel</button><span class="hf-group">◌ Administrar</span><button data-view="posts"><i>▤</i>Posts</button><button class="hf-sub" data-action="new-post">Adicionar</button><button class="hf-sub" data-view="posts">Listar</button><button data-view="videos"><i>▣</i>Vídeos</button><button data-view="banners"><i>▰</i>Banners</button><button class="hf-sub" data-action="new-banner">Adicionar</button><button class="hf-sub" data-view="banners">Listar</button>${menuLink('Contatos','contatos.html','✉')}${menuLink('Comentários','comentarios.html','▱')}${menuLink('Assinantes','assinantes.html','♟')}${menuLink('Enquetes','enquetes.html','▥')}<button data-view="scheduled"><i>◷</i>Agendamento</button><span class="hf-group">◌ Funções</span>${menuLink('Plugins','plugins.html','▧')}<button data-view="settings"><i>⚙</i>Configurações do site</button><span class="hf-group">◌ Configurar</span>${menuLink('Perfil','perfil.html','♙')}<button data-action="logout"><i>↪</i>Sair</button></nav>`;
+  shell.prepend(sidebar);
+  const subs=sidebar.querySelectorAll('.hf-sub');subs[0].dataset.parent='posts';subs[1].dataset.parent='posts';subs[2].dataset.parent='banners';subs[3].dataset.parent='banners';
+  const top=document.createElement('div');top.className='hf-topbar';top.innerHTML='<button id="hfMenuToggle" aria-label="Abrir ou fechar menu" aria-expanded="false">☰</button><img src="assets/admin-modelo/logo.png" alt="Logo do painel"><a href="index.html" target="_blank" rel="noopener">VER SITE ↗</a>';
+  const crumbs=document.createElement('div');crumbs.className='hf-breadcrumb';crumbs.innerHTML='<button data-view="posts">Painel</button><span>›</span><button id="hfCrumbSection" data-view="banners">Banners</button><span>›</span><div id="hfCrumbCurrent">Gerenciar</div>';
+  const content=document.createElement('div');content.className='hf-content';content.innerHTML='<h1 class="hf-title" id="hfTitle">Gerenciar Banners</h1>';
+  shell.append(top,crumbs,content);
+  const posts=document.createElement('section');posts.className='hf-pane';posts.id='hfPosts';posts.append(head,editorial);content.append(posts);
+  const banners=document.createElement('section');banners.className='hf-pane';banners.id='hfBanners';banners.innerHTML='<div class="hf-list-tools"><input type="search" id="hfBannerSearch" aria-label="Pesquisar banners" placeholder="Pesquisar banner..."><button class="hf-button" data-action="new-banner">Novo Banner</button></div><p class="hf-muted" style="margin-bottom:15px">ND = contagem de cliques não disponível nesta migração. ↗ abre o painel antigo.</p><div class="hf-table-wrap"><table class="hf-table"><thead><tr><th>Nome do Banner</th><th>Cliques</th><th>Tamanho / Ordem</th><th>Tipo</th><th>Status</th><th>Editar Banner</th></tr></thead><tbody id="hfBannerRows"></tbody></table></div>';
+  content.append(banners);
+  const listStatus=document.createElement('p');listStatus.id='hfBannerListStatus';listStatus.className='hf-notice';listStatus.setAttribute('role','status');banners.prepend(listStatus);
+  const edit=document.createElement('section');edit.className='hf-pane';edit.id='hfBannerEdit';
+  const sizes=[['Tamanho 728x90',728,90,11],['Tamanho 300x300',300,300,10],['Tamanho 360x215',360,215,1]].map(([group,w,h,n])=>`<optgroup label="${group}">${Array.from({length:n},(_,i)=>`<option value="${w}x${h}:${i+1}">${w}x${h} Bloco ${i+1}</option>`).join('')}</optgroup>`).join('');
+  edit.innerHTML=`<div id="hfBannerStatus" class="hf-notice" role="status"></div><div class="hf-banner-grid"><form class="hf-form" id="hfBannerForm"><h4>Configuração Geral</h4><div class="hf-row"><label for="hfBannerName">Nome do Banner</label><div><input id="hfBannerName" required maxlength="180"></div></div><div class="hf-row"><label for="hfBannerType">Tipo de Banner</label><div><select id="hfBannerType"><option value="image">Imagem (JPG, PNG, GIF)</option><option value="html">HTML (Para Adsense e outros)</option><option value="video">Vídeo (MP4 ou WebM)</option><option value="flash" disabled>Flash (SWF) [Tecnologia obsoleta]</option></select></div></div><div class="hf-row"><label for="hfBannerSize">Tamanho / Ordem</label><div><select id="hfBannerSize">${sizes}</select></div></div><h4 class="hf-section-title" id="hfMediaHeading">Banner por Imagem</h4><div class="hf-row"><label for="hfBannerClicks">Cliques no Banner</label><div><input id="hfBannerClicks" value="ND" disabled></div></div><div class="hf-row" id="hfFileRow"><label for="hfBannerFile" id="hfFileLabel">Imagem</label><div><input id="hfBannerFile" type="file" accept="image/jpeg,image/png,image/gif,image/webp"><small id="hfFileInfo"></small></div></div><div class="hf-row" id="hfUrlRow"><label for="hfBannerMediaUrl">Ou endereço da mídia</label><div><input id="hfBannerMediaUrl" type="url" placeholder="https://..."></div></div><div class="hf-row" id="hfHtmlRow" hidden><label for="hfBannerHtml">Código HTML</label><div><textarea id="hfBannerHtml" placeholder="Cole o código do anúncio"></textarea><small>Exibido em um quadro isolado. Alguns provedores exigem configuração própria.</small></div></div><div class="hf-row" id="hfLinkRow"><label for="hfBannerLink">Link de destino</label><div><input id="hfBannerLink" type="url" placeholder="Link do banner (incluindo o http:// ou https://)"></div></div><div class="hf-row"><label for="hfBannerActive">Publicação</label><div><label><input id="hfBannerActive" type="checkbox" checked> Banner ativo</label></div></div><div class="hf-row"><div></div><div><button class="hf-button" id="hfSaveBanner" type="submit">Salvar Banner</button> <button class="hf-button secondary" type="button" data-view="banners">Voltar</button></div></div></form><aside class="hf-banner-info"><div class="hf-card"><h3>Info</h3><div><p>Veja no layout abaixo os locais disponíveis.</p><p>Os banners deste site são exibidos na faixa de publicidade abaixo do menu. Tamanho define o formato e Bloco define a ordem dentro de cada formato.</p></div></div><div class="hf-card"><h3>Layout do Tema Atual</h3><div><div class="hf-layout-map"><div>INFORMA NA HORA</div><div>Menu de notícias</div><div class="ad">Publicidade · 728×90 / 300×300 / 360×215</div><div>Transmissão ao vivo</div><div>Notícias e editorias</div></div></div></div><div class="hf-card"><h3>Prévia do Banner</h3><div class="hf-preview" id="hfBannerPreview"></div></div></aside></div>`;
+  content.append(edit);
+  const settings=document.createElement('section');settings.className='hf-pane';settings.id='hfSettings';settings.innerHTML='<p class="hf-notice">Os itens marcados com ↗ no menu abrem os módulos que continuam no painel antigo.</p><div id="hfSettingsHost"></div>';content.append(settings);
+  const videos=document.createElement('section');videos.className='hf-pane';videos.id='hfVideos';videos.innerHTML='<div class="hf-card"><h3>Transmissão ao vivo</h3><div id="hfLiveHost"></div></div><a class="hf-button secondary" href="https://informanahora.com.br/hf-admin/" target="_blank" rel="noopener">Gerenciar vídeos no painel antigo ↗</a>';content.append(videos);
+  const live=$('adminLiveSettings');if(live){$('hfLiveHost').append(live);live.open=true;live.style.setProperty('display','block','important');}
+  const migration=$('migrationAdminTools');if(migration){$('hfSettingsHost').append(migration);migration.querySelectorAll('label').forEach(el=>el.remove());const hint=document.createElement('p');hint.textContent='Para editar ou ativar anúncios, use Banners no menu.';migration.append(hint);migration.open=true;migration.style.setProperty('display','block','important');}
+  let editingId=null,editingOriginal=null,fileData='',loadPromise=null;
+  function show(name,title,current){for(const p of [posts,banners,edit,settings,videos])p.hidden=p.id!==name;$('hfTitle').textContent=title;$('hfCrumbCurrent').textContent=current||'Gerenciar';$('hfCrumbSection').textContent=name==='hfPosts'?'Posts':name==='hfVideos'?'Vídeos':name==='hfSettings'?'Configurações':'Banners';$('hfCrumbSection').dataset.view=name==='hfPosts'?'posts':name==='hfVideos'?'videos':name==='hfSettings'?'settings':'banners';shell.classList.remove('hf-menu-open');$('hfMenuToggle').setAttribute('aria-expanded','false');sidebar.querySelectorAll('[data-view]').forEach(b=>b.classList.toggle('active',!b.classList.contains('hf-sub')&&b.dataset.view===$('hfCrumbSection').dataset.view));subs.forEach(b=>b.hidden=b.dataset.parent!==$('hfCrumbSection').dataset.view);$('adminDashboard').scrollTop=0;}
+  function notice(message,type=''){const el=$('hfBannerStatus');el.textContent=message;el.className='hf-notice '+type;}
+  function table(){const q=$('hfBannerSearch').value.toLocaleLowerCase('pt-BR');const rows=$('hfBannerRows');rows.replaceChildren();for(const b of migrationBanners.filter(b=>(b.name||'Revive zona '+b.zone).toLocaleLowerCase('pt-BR').includes(q))){const tr=document.createElement('tr');const vals=[b.name||'Revive zona '+b.zone,'ND',b.zone?'Revive':`${b.width||300}x${b.height||300} Bloco ${b.order||1}`,b.zone?'Revive':({html:'html',video:'vídeo',image:'imagem'}[b.type]||'imagem'),b.disabled?'Inativo':'Ativo'];vals.forEach(v=>{const td=document.createElement('td');td.textContent=v;tr.append(td);});const td=document.createElement('td');const btn=document.createElement('button');btn.className='hf-button';btn.textContent='Editar Banner';btn.onclick=()=>openBanner(b);td.append(btn);tr.append(td);rows.append(tr);}if(!rows.children.length){const tr=document.createElement('tr');const td=document.createElement('td');td.colSpan=6;td.textContent='Nenhum banner encontrado.';tr.append(td);rows.append(tr);}}
+  async function loadBanners(){if(loadPromise)return loadPromise;loadPromise=(async()=>{try{listStatus.textContent='';const saved=await window.storage.get('site:migrated-banners');if(saved?.value){const data=JSON.parse(saved.value);if(!Array.isArray(data))throw new Error('Formato de anúncios inválido.');migrationBanners=data;}table();}catch(e){listStatus.textContent='Não foi possível atualizar os banners do banco: '+e.message;listStatus.className='hf-notice error';}finally{loadPromise=null;}})();return loadPromise;}
+  function route(view){if(view==='banners'){show('hfBanners','Gerenciar Banners');table();loadBanners();}else if(view==='posts'||view==='scheduled'){show('hfPosts',view==='scheduled'?'Agendamento':'Gerenciar Posts');$('adminArticleFilter').value=view==='scheduled'?'scheduled':'all';renderAdminArticleList();}else if(view==='videos'){show('hfVideos','Vídeos');}else if(view==='settings'){show('hfSettings','Configurações do site');}}
+  function preview(){const host=$('hfBannerPreview');host.replaceChildren();const type=$('hfBannerType').value;let el;if(editingOriginal?.zone){host.textContent='Anúncio servido pela integração Revive existente.';return;}const src=fileData||$('hfBannerMediaUrl').value||editingOriginal?.image||editingOriginal?.videoUrl||editingOriginal?.imageUrl;if(type==='html'){host.textContent='A prévia de HTML é exibida somente no site após salvar.';return;}if(!src){host.textContent='Selecione uma mídia para visualizar.';return;}if(type==='video'){el=document.createElement('video');el.controls=true;}else{el=document.createElement('img');el.alt=$('hfBannerName').value||'Prévia do banner';}el.src=src;host.append(el);}
+  function typeChanged(){const type=$('hfBannerType').value;$('hfHtmlRow').hidden=type!=='html';$('hfFileRow').hidden=type==='html';$('hfUrlRow').hidden=type==='html';$('hfLinkRow').hidden=type==='html';$('hfMediaHeading').textContent=type==='html'?'Banner por HTML':type==='video'?'Banner por Vídeo':'Banner por Imagem';$('hfFileLabel').textContent=type==='video'?'Vídeo':'Imagem';$('hfBannerFile').accept=type==='video'?'video/mp4,video/webm':'image/jpeg,image/png,image/gif,image/webp';preview();}
+  function openBanner(b=null){editingId=b?.id||null;editingOriginal=b?structuredClone(b):null;fileData='';$('hfBannerForm').reset();$('hfBannerName').value=b?.name||(b?.zone?'Revive zona '+b.zone:'');$('hfBannerType').value=b?.zone?'html':b?.type||'image';$('hfBannerSize').value=`${b?.width||728}x${b?.height||90}:${b?.order||(b?.name==='banner 06 10 expoturismo'?2:1)}`;if(!$('hfBannerSize').value)$('hfBannerSize').selectedIndex=0;$('hfBannerLink').value=b?.link||'';$('hfBannerMediaUrl').value=b?.videoUrl||(b?.image?.startsWith('https:')?b.image:'')||'';$('hfBannerHtml').value=b?.html||'';$('hfBannerActive').checked=!b?.disabled;$('hfFileInfo').textContent=b?.image?'Imagem atual carregada. Escolha um arquivo apenas para substituí-la.':'';for(const id of ['hfBannerType','hfBannerSize','hfBannerHtml'])$(id).disabled=!!b?.zone;show('hfBannerEdit',b?'Atualizar Banner':'Adicionar Banner',b?'Editar':'Adicionar');notice(b?.zone?'A integração Revive será preservada. Você pode alterar o nome e a ativação.':'');typeChanged();}
+  shell.addEventListener('click',e=>{const btn=e.target.closest('[data-view],[data-action]');if(!btn)return;if(btn.dataset.view)route(btn.dataset.view);if(btn.dataset.action==='new-banner')openBanner();if(btn.dataset.action==='new-post'){route('posts');resetAdminEditor();}if(btn.dataset.action==='logout')$('adminDashboardLogoutBtn').click();});
+  $('hfMenuToggle').onclick=()=>{const active=shell.classList.toggle('hf-menu-open');$('hfMenuToggle').setAttribute('aria-expanded',String(active));};
+  $('hfBannerSearch').oninput=table;$('hfBannerType').onchange=()=>{fileData='';$('hfBannerFile').value='';$('hfBannerMediaUrl').value='';typeChanged();};$('hfBannerMediaUrl').oninput=preview;
+  $('adminOpenSiteEditBtn').addEventListener('click',()=>{document.body.classList.remove('admin-page');let back=$('hfBackToPanel');if(!back){back=document.createElement('button');back.id='hfBackToPanel';back.textContent='Voltar ao painel';back.className='hf-button';back.style.cssText='position:fixed;bottom:20px;right:20px;z-index:100010';back.onclick=()=>{document.body.classList.add('admin-page');back.hidden=true;openAdminDashboard();};document.body.append(back);}back.hidden=false;});
+  $('hfBannerFile').onchange=async()=>{const file=$('hfBannerFile').files[0];if(!file)return;const allowed=$('hfBannerType').value==='video'?['video/mp4','video/webm']:['image/jpeg','image/png','image/gif','image/webp'];if(!allowed.includes(file.type)||file.size>4*1024*1024){notice('Use um arquivo compatível de até 4 MB. Para vídeos maiores, informe o endereço HTTPS.','error');$('hfBannerFile').value='';return;}try{fileData=await new Promise((resolve,reject)=>{const reader=new FileReader();reader.onload=()=>resolve(reader.result);reader.onerror=reject;reader.readAsDataURL(file);});$('hfFileInfo').textContent=file.name;notice('');preview();}catch(e){notice('Não foi possível ler o arquivo.','error');}};
+  function webUrl(value){if(!value)return '';const u=new URL(value);if(!['http:','https:'].includes(u.protocol))throw new Error('Use links HTTP ou HTTPS.');return u.href;}
+  $('hfBannerForm').onsubmit=async e=>{e.preventDefault();if(!requireAdmin())return;const btn=$('hfSaveBanner');btn.disabled=true;notice('Salvando…');try{
+    if(!siteSupabase)throw new Error('Conexão com o banco indisponível. Nada foi publicado.');
+    const raw=await window.storage.get('site:migrated-banners');const latest=raw?.value?JSON.parse(raw.value):structuredClone(MIGRATION_BANNERS);if(!Array.isArray(latest))throw new Error('Não foi possível ler os banners existentes.');
+    const original=editingId?latest.find(b=>b.id===editingId):null;if(editingId&&!original)throw new Error('Este banner foi removido. Atualize a lista antes de editar.');if(raw?.value&&editingOriginal&&JSON.stringify(original)!==JSON.stringify(editingOriginal))throw new Error('Este banner foi alterado em outra sessão. Reabra-o pela lista para atualizar.');
+    const b={...(original||{}),id:editingId||'banner-'+crypto.randomUUID(),name:$('hfBannerName').value.trim(),disabled:!$('hfBannerActive').checked};if(!b.name)throw new Error('Informe o nome do banner.');
+    if(!b.zone){const [size,order]=$('hfBannerSize').value.split(':');const [width,height]=size.split('x');Object.assign(b,{width,height,order:Number(order),type:$('hfBannerType').value});const media=fileData||webUrl($('hfBannerMediaUrl').value.trim());b.link=webUrl($('hfBannerLink').value.trim());if(b.type==='image'){b.image=media||(original?.type!=='video'&&original?.type!=='html'?original?.image||original?.imageUrl:'');if(!b.image)throw new Error('Selecione uma imagem ou informe seu endereço.');delete b.videoUrl;delete b.html;}else if(b.type==='video'){b.videoUrl=media||original?.videoUrl;if(!b.videoUrl)throw new Error('Selecione um vídeo ou informe seu endereço.');delete b.image;delete b.html;}else{b.html=$('hfBannerHtml').value.trim();if(!b.html)throw new Error('Informe o código HTML do anúncio.');delete b.image;delete b.videoUrl;}}
+    const next=latest.map(x=>x.id===b.id?b:x);if(!editingId)next.push(b);await window.storage.set('site:migrated-banners',JSON.stringify(next));migrationBanners=next;editingId=b.id;editingOriginal=structuredClone(b);$('hfTitle').textContent='Atualizar Banner';$('hfCrumbCurrent').textContent='Editar';notice('✓ Concluído: O banner foi salvo com sucesso!','success');table();
+  }catch(err){notice('Não foi possível salvar: '+err.message,'error');}finally{btn.disabled=false;}};
+  route('banners');
+});
+
+</script>
 </body>
 </html>
