@@ -2974,6 +2974,25 @@
   #livePortalBody .live-mini-grid,#livePortalBody .live-stream-list{grid-template-columns:1fr}
 }
 </style>
+<style>
+/* Editorias (Rondônia, Política, Economia, Mundo, Tecnologia) no mesmo layout de portal:
+   destaque, faixa de patrocinador, fileiras de 5 matérias e patrocinadores na coluna da direita. 16/11/2026 */
+.sponsor-rail .section-head{margin:0 0 10px;border-bottom:1px solid var(--line);padding-bottom:6px}
+.sponsor-rail .section-head h2{font-family:var(--font-mono);font-size:11px;text-transform:uppercase;letter-spacing:.06em}
+.sponsor-rail .migration-ads{display:flex;flex-direction:column;flex-wrap:nowrap;align-items:center;gap:14px;margin:0}
+.sponsor-rail .migration-ad{width:100%;flex:0 0 auto}
+.sponsor-rail .migration-ad img{width:100%;max-width:300px;height:auto}
+.sponsor-rail .migration-ad iframe,.sponsor-rail .migration-ad video{max-width:100%}
+.sponsor-rail .sponsor-placeholder{width:100%;max-width:300px;aspect-ratio:6/5;margin:0 auto}
+#categoryBody .editorial-batch~.editorial-batch .editorial-grid{grid-template-columns:repeat(5,minmax(0,1fr));gap:14px}
+#categoryBody .editorial-batch~.editorial-batch .editorial-card.lead{grid-row:auto;grid-column:auto}
+#categoryBody .editorial-batch~.editorial-batch .editorial-card h2,
+#categoryBody .editorial-batch~.editorial-batch .editorial-card h3{font-size:14.5px;font-weight:700;line-height:1.2}
+#categoryBody .editorial-batch~.editorial-batch .editorial-card .opening{display:none}
+#categoryBody .editorial-batch~.editorial-batch{border-top:0;padding-top:0;margin-top:0}
+@media(max-width:1000px){.editorial-sidebar .sponsor-rail{grid-column:1/-1}}
+@media(max-width:760px){#categoryBody .editorial-batch~.editorial-batch .editorial-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+</style>
 </head>
 <body>
 
@@ -4278,6 +4297,18 @@ function migrationFillInlineSponsors(scope){
     slot.replaceChildren(pool.length?migrationBuildBanner(pool[n%pool.length]):migrationSponsorPlaceholder('Espaço para patrocinador · 728×90'));
   });
 }
+/* Bloco "Patrocinadores" da coluna da direita nas páginas de editoria (mesmos banners da direita do Ao Vivo). */
+function migrationFillRailSponsors(scope){
+  const rails=(scope||document).querySelectorAll('[data-sponsor-rail]');
+  if(!rails.length)return;
+  const list=migrationBanners.filter(x=>!x.disabled&&!x.zone&&migrationBannerPosition(x)==='right').slice().sort((a,b)=>(Number(a.order)||1)-(Number(b.order)||1));
+  rails.forEach(rail=>{
+    rail.innerHTML='<div class="section-head"><h2>Patrocinadores</h2></div><div class="migration-ads"></div>';
+    const stack=rail.lastElementChild;
+    for(const b of list)stack.append(migrationBuildBanner(b));
+    if(!list.length)stack.append(migrationSponsorPlaceholder('Espaço para patrocinador · 300×250'));
+  });
+}
 async function migrationRenderBanners(){
   try{const r=await window.storage.get('site:migrated-banners');if(r?.value){const parsed=JSON.parse(r.value);if(Array.isArray(parsed))migrationBanners=parsed;}}catch(e){console.warn('Publicidade: usando cópia incorporada',e);}
   const active=migrationBanners.filter(x=>!x.disabled).slice().sort((a,b)=>(Number(a.order)||1)-(Number(b.order)||1));
@@ -4301,6 +4332,7 @@ async function migrationRenderBanners(){
   }
   if(active.some(x=>x.zone)){const sc=document.createElement('script');sc.async=true;sc.src='https://adserve.pen6.cc/www/delivery/asyncantifraudjs.php';(topSlot||rightSlot)?.append(sc);}
   migrationFillInlineSponsors(document);
+  migrationFillRailSponsors(document);
 }
 
 function migrationAdminPanel(){
@@ -6389,7 +6421,10 @@ function manualCategoryLabel(key){
 }
 
 function manualForCategory(key){
-  return manualArticles.filter(a=>a.category===key && (a.status || 'published') === 'published');
+  // Mais recentes primeiro; destaque/urgente/manchete seguram o topo só por 3 dias.
+  const pin = it => (Date.now() - newsDateValue(it) < 72*60*60*1000) ? manualPlacementScore(it) : 0;
+  return manualArticles.filter(a=>a.category===key && (a.status || 'published') === 'published')
+    .sort((a,b)=> (pin(b) - pin(a)) || (newsDateValue(b) - newsDateValue(a)));
 }
 
 function manualPlacementScore(item){
@@ -6414,8 +6449,10 @@ function mergeManualWithCategory(key, items){
     if(!old || newsDateValue(item) >= newsDateValue(old)) map.set(id,item);
   });
 
+  // Destaque/urgente/manchete só seguram a matéria no topo por 3 dias; depois ela entra na ordem por data.
+  const pinScore = it => (Date.now() - newsDateValue(it) < 72*60*60*1000) ? manualPlacementScore(it) : 0;
   return [...map.values()].sort((a,b)=>{
-    const placementDiff = manualPlacementScore(b) - manualPlacementScore(a);
+    const placementDiff = pinScore(b) - pinScore(a);
     if(placementDiff) return placementDiff;
     return newsDateValue(b)-newsDateValue(a);
   });
@@ -7795,6 +7832,8 @@ setTimeout(async()=>{
   renderLatestNewsBar();
   renderLivePortal();
   manualArticleFromHash();
+  // Editorias da redação (Rondônia etc.) abertas direto pelo link: redesenha agora que as matérias carregaram.
+  { const k=(location.hash||'').replace(/^#/,''); if(['rondonia','geral','manchetes','mais-lidas'].includes(k) && typeof renderCategoryNews==='function' && document.getElementById('categoryMain')?.style.display!=='none') renderCategoryNews(k); }
 },250);
 
 window.addEventListener('hashchange',()=>{
@@ -8672,7 +8711,7 @@ function renderEditorialCategory(key, items, page=null){
     return `<div class="editorial-batch">
       ${batchIndex > 0 ? `<div class="editorial-batch-label">Mais notícias de ${escHtml(label)}</div>` : ''}
       <div class="editorial-grid">${cards}</div>
-    </div>`;
+    </div>${batchIndex < batches.length - 1 ? `<div class="sponsor-inline" data-sponsor-slot="${batchIndex}"></div>` : ''}`;
   }).join('');
 
   const ranked = items.slice(0,5).map((it,index)=>{
@@ -8698,6 +8737,8 @@ function renderEditorialCategory(key, items, page=null){
           <ol>${ranked}</ol>
         </div>
 
+        <section class="sponsor-rail" data-sponsor-rail aria-label="Patrocinadores"></section>
+
         <div class="editorial-newsletter">
           <h3>Receba o resumo do dia</h3>
           <p>As principais notícias de ${escHtml(label.toLowerCase())} direto no seu e-mail, todas as manhãs.</p>
@@ -8709,6 +8750,8 @@ function renderEditorialCategory(key, items, page=null){
         </div>
       </aside>
     </div>`;
+  if(typeof migrationFillInlineSponsors === 'function') migrationFillInlineSponsors(bodyEl);
+  if(typeof migrationFillRailSponsors === 'function') migrationFillRailSponsors(bodyEl);
 }
 
 
