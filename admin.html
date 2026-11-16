@@ -3003,6 +3003,63 @@ body.admin-page #stealthAdminModal{background:#edeef2}body.admin-page .admin-dia
 @media(max-width:767px){body.admin-page .admin-dashboard-shell{padding-left:0}.hf-sidebar{transform:translateX(-100%);transition:transform .2s;width:200px;top:60px;box-shadow:3px 0 10px #0002}.hf-menu-open .hf-sidebar{transform:translateX(0)}.hf-topbar{position:sticky;top:0;z-index:4}.hf-breadcrumb{padding:0 25px}.hf-content{padding:25px}.hf-title{font-size:36px}.hf-row{display:block;margin:0 0 15px}.hf-row>label{display:block;text-align:left;padding:0 0 6px}.hf-row>div{padding:0}.hf-banner-grid{display:block}.hf-banner-info{display:block;margin-top:30px}.hf-form h4.hf-section-title{margin-top:36px}body.admin-page .admin-dashboard-body{grid-template-columns:1fr}body.admin-page .admin-article-list{max-height:400px}.hf-list-tools{align-items:stretch;flex-direction:column}.hf-breadcrumb{height:64px}.hf-topbar a{font-size:10px}}
 
 </style>
+<style>
+/* Ao vivo na coluna da direita + espaços de patrocinadores (topo e direita) — 16/11/2026 */
+.live-shell{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:34px;align-items:start}
+.live-shell>#livePortalBody{min-width:0}
+#livePortalBody .live-portal-layout{display:block}
+.live-rail{display:flex;flex-direction:column;gap:22px;min-width:0}
+.live-rail #liveBroadcast{max-width:none;width:100%;margin:0}
+.live-rail .live-sidebar-box{margin-bottom:0}
+#liveRailRanked:empty{display:none}
+#sponsorsRight .section-head{margin:0 0 10px;border-bottom:1px solid var(--line);padding-bottom:6px}
+#sponsorsRight .section-head h2{font-family:var(--font-mono);font-size:11px;text-transform:uppercase;letter-spacing:.06em}
+#sponsorsRight .migration-ads{display:flex;flex-direction:column;flex-wrap:nowrap;align-items:center;gap:14px;margin:0}
+#sponsorsRight .migration-ad{width:100%;flex:0 0 auto}
+#sponsorsRight .migration-ad img{width:100%;max-width:300px;height:auto}
+#sponsorsRight .migration-ad iframe,#sponsorsRight .migration-ad video{max-width:100%}
+.sponsor-placeholder{display:grid;place-items:center;border:1px dashed var(--line);border-radius:4px;background:var(--paper-dim);color:var(--ink-soft);font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;text-align:center;padding:10px}
+#migrationSponsors .sponsor-placeholder{width:min(728px,100%);height:90px;margin:0 auto}
+#sponsorsRight .sponsor-placeholder{width:100%;max-width:300px;aspect-ratio:6/5;margin:0 auto}
+@media(max-width:980px){
+  .live-shell{display:flex;flex-direction:column;align-items:stretch;gap:22px}
+  .live-rail{display:contents}
+  .live-rail #liveBroadcast{order:1}
+  .live-shell>#livePortalBody{order:2}
+  #liveRailRanked{order:3}
+  #sponsorsRight{order:4}
+  #liveRailSections{order:5}
+}
+</style>
+<style>
+/* Layout de portal na página Ao Vivo: matérias lado a lado, faixa de patrocinador e novas
+   fileiras de matérias. Mesmas cores, fontes e conteúdo de antes — só a disposição muda. 16/11/2026 */
+#livePortalBody .live-mini-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;border-bottom:0;padding-bottom:0}
+#livePortalBody .live-mini-card h3{font-size:15px}
+#livePortalBody .live-stream-list{grid-template-columns:repeat(4,minmax(0,1fr));gap:22px 16px;margin-top:0}
+#livePortalBody .live-stream-item{display:block;padding:0;border-bottom:0;min-width:0}
+#livePortalBody .live-stream-item img,#livePortalBody .live-stream-item .live-placeholder{width:100%;height:auto;aspect-ratio:16/9;margin-bottom:8px}
+#livePortalBody .live-stream-item h4{font-family:var(--font-display);font-size:14.5px;line-height:1.2}
+.sponsor-inline{margin:24px 0;padding:12px 12px 14px;background:var(--paper-dim);border-radius:4px;text-align:center;min-width:0}
+.sponsor-inline::before{content:"Publicidade";display:block;margin-bottom:8px;font-family:var(--font-mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+.sponsor-inline .migration-ad{max-width:100%}
+.sponsor-inline .migration-ad img{display:block;max-width:100%;height:auto;margin:0 auto}
+.sponsor-inline .migration-ad iframe,.sponsor-inline .migration-ad video{max-width:100%}
+.sponsor-inline .sponsor-placeholder{width:min(728px,100%);height:90px;margin:0 auto;background:var(--paper)}
+.live-category-sections>.sponsor-inline{margin:0}
+#livePortalBody .live-category-batch+.live-category-batch .live-category-grid{grid-template-columns:repeat(5,minmax(0,1fr));gap:14px}
+#livePortalBody .live-category-batch+.live-category-batch .live-category-card:first-child{grid-row:auto;grid-column:auto}
+#livePortalBody .live-category-batch+.live-category-batch .live-category-card h4,
+#livePortalBody .live-category-batch+.live-category-batch .live-category-card:first-child h4{font-size:14px}
+#livePortalBody .live-category-batch+.live-category-batch .live-category-card .opening{display:none}
+@media(max-width:760px){
+  #livePortalBody .live-mini-grid,#livePortalBody .live-stream-list,
+  #livePortalBody .live-category-batch+.live-category-batch .live-category-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:400px){
+  #livePortalBody .live-mini-grid,#livePortalBody .live-stream-list{grid-template-columns:1fr}
+}
+</style>
 </head>
 <body class="admin-page">
 <div class="admin-mobile-brand" id="adminMobileBrand">
@@ -3655,12 +3712,31 @@ body.admin-page #stealthAdminModal{background:#edeef2}body.admin-page .admin-dia
     <h1>Ao Vivo</h1>
     <div class="live-status">Atualizando em tempo real</div>
   </div>
-    <section id="liveBroadcast" aria-label="Transmissão ao vivo">
-    <div class="live-broadcast-head"><strong>TV INFORMA NA HORA · AO VIVO</strong><a id="liveBroadcastLink" hidden target="_blank" rel="noopener">Abrir transmissão ↗</a></div>
-    <div id="liveBroadcastScreen"><p class="live-broadcast-empty">Transmissão ainda não configurada.</p></div>
-  </section>
-  <div id="livePortalBody">
-    <p class="sports-loading">Carregando as notícias mais recentes…</p>
+  <div class="live-shell">
+    <div id="livePortalBody">
+      <p class="sports-loading">Carregando as notícias mais recentes…</p>
+    </div>
+    <aside class="live-rail" aria-label="Ao vivo e patrocinadores">
+      <section id="liveBroadcast" aria-label="Transmissão ao vivo">
+        <div class="live-broadcast-head"><strong>TV INFORMA NA HORA · AO VIVO</strong><a id="liveBroadcastLink" hidden target="_blank" rel="noopener">Abrir transmissão ↗</a></div>
+        <div id="liveBroadcastScreen"><p class="live-broadcast-empty">Transmissão ainda não configurada.</p></div>
+      </section>
+      <div id="liveRailRanked"></div>
+      <section id="sponsorsRight" aria-label="Patrocinadores"></section>
+      <div id="liveRailSections">
+        <div class="live-sidebar-box">
+          <h3>Editorias</h3>
+          <ol class="live-sidebar-ranked">
+            <li><a href="#rondonia" onclick="showCategoryPage('rondonia');return false;">Rondônia</a></li>
+            <li><a href="#politica" onclick="showCategoryPage('politica');return false;">Política</a></li>
+            <li><a href="#economia" onclick="showCategoryPage('economia');return false;">Economia</a></li>
+            <li><a href="#mundo" onclick="showCategoryPage('mundo');return false;">Mundo</a></li>
+            <li><a href="#tecnologia" onclick="showCategoryPage('tecnologia');return false;">Tecnologia</a></li>
+            <li><a href="#esportes/brasileirao" onclick="showSportsSection('brasileirao');return false;">Esportes</a></li>
+          </ol>
+        </div>
+      </div>
+    </aside>
   </div>
 </main>
 
@@ -4258,22 +4334,64 @@ async function migrationSaveBanners(){
   if(!siteSupabase)throw new Error('Supabase indisponível. Não é possível salvar para todos os visitantes.');
   await window.storage.set('site:migrated-banners',JSON.stringify(migrationBanners));
 }
-async function migrationRenderBanners(){
-  try{const r=await window.storage.get('site:migrated-banners');if(r?.value){const parsed=JSON.parse(r.value);if(Array.isArray(parsed))migrationBanners=parsed;}}catch(e){console.warn('Publicidade: usando cópia incorporada',e);}
-  const slot=document.getElementById('migrationSponsors');if(!slot)return;
-  slot.innerHTML='<div class="section-head"><h2>Publicidade</h2><div class="migration-ad-controls"><button type="button" aria-label="Anúncios anteriores">←</button><button type="button" aria-label="Próximos anúncios">→</button></div></div><div class="migration-ads"></div>';
-  const grid=slot.lastElementChild;const buttons=slot.querySelectorAll('button');buttons[0].onclick=()=>grid.scrollBy({left:-320,behavior:'smooth'});buttons[1].onclick=()=>grid.scrollBy({left:320,behavior:'smooth'});
+/* Publicidade em dois espaços: topo (abaixo do menu) e coluna da direita da página Ao Vivo.
+   Cada banner pode ter position 'top' ou 'right'; sem isso, formatos largos (728x90) vão
+   para o topo e os demais (300x300 etc.) para a direita. */
+function migrationBannerPosition(b){
+  if(b.position==='top'||b.position==='right'||b.position==='middle')return b.position;
+  const w=Number(b.width)||300,h=Number(b.height)||300;
+  return w>h*2?'top':'right';
+}
+function migrationBuildBanner(b){
   const safeLink=value=>{try{const u=new URL(value,location.href);return ['https:','http:'].includes(u.protocol)?u.href:'';}catch{return '';}};
   const safeMedia=value=>/^data:(image\/(png|jpeg|gif|webp)|video\/(mp4|webm));base64,/i.test(value||'')?value:safeLink(value||'');
-  for(const b of migrationBanners.filter(x=>!x.disabled).slice().sort((a,b)=>(Number(a.order)||1)-(Number(b.order)||1))){
-    const box=document.createElement('div');box.className='migration-ad';const width=Number(b.width)||300,height=Number(b.height)||300;
-    if(b.type==='html'&&b.html&&!b.zone){const frame=document.createElement('iframe');frame.title=b.name||'Publicidade';frame.setAttribute('sandbox','allow-scripts allow-popups allow-popups-to-escape-sandbox');frame.referrerPolicy='no-referrer';frame.width=width;frame.height=height;frame.style.cssText='border:0;max-width:100%';frame.srcdoc=b.html;box.append(frame);}
-    else if(b.type==='video'&&b.videoUrl){const video=document.createElement('video');video.src=safeMedia(b.videoUrl);video.controls=true;video.playsInline=true;video.preload='metadata';video.width=width;video.height=height;video.style.maxWidth='100%';box.append(video);if(safeLink(b.link)){const a=document.createElement('a');a.href=safeLink(b.link);a.target='_blank';a.rel='noopener sponsored';a.textContent='Visitar anunciante';box.append(a);}}
-    else if(b.image||b.imageUrl){const a=document.createElement('a');const destination=safeLink(b.link);if(destination)a.href=destination;a.target='_blank';a.rel='noopener sponsored';const im=document.createElement('img');im.src=safeMedia(b.image||b.imageUrl);im.alt=b.name||'Publicidade';im.width=width;im.height=height;if(b.imageUrl&&b.imageUrl!==b.image)im.onerror=()=>{im.onerror=null;im.src=safeMedia(b.imageUrl);};a.append(im);box.append(a);}
-    else if(b.zone){const ins=document.createElement('ins');ins.setAttribute('data-revive-zoneid',b.zone);ins.setAttribute('data-revive-id',b.reviveId);box.append(ins);}
-    if(width>height*2)box.classList.add('wide');grid.append(box);
+  const box=document.createElement('div');box.className='migration-ad';const width=Number(b.width)||300,height=Number(b.height)||300;
+  if(b.type==='html'&&b.html&&!b.zone){const frame=document.createElement('iframe');frame.title=b.name||'Publicidade';frame.setAttribute('sandbox','allow-scripts allow-popups allow-popups-to-escape-sandbox');frame.referrerPolicy='no-referrer';frame.width=width;frame.height=height;frame.style.cssText='border:0;max-width:100%';frame.srcdoc=b.html;box.append(frame);}
+  else if(b.type==='video'&&b.videoUrl){const video=document.createElement('video');video.src=safeMedia(b.videoUrl);video.controls=true;video.playsInline=true;video.preload='metadata';video.width=width;video.height=height;video.style.maxWidth='100%';box.append(video);if(safeLink(b.link)){const a=document.createElement('a');a.href=safeLink(b.link);a.target='_blank';a.rel='noopener sponsored';a.textContent='Visitar anunciante';box.append(a);}}
+  else if(b.image||b.imageUrl){const a=document.createElement('a');const destination=safeLink(b.link);if(destination)a.href=destination;a.target='_blank';a.rel='noopener sponsored';const im=document.createElement('img');im.src=safeMedia(b.image||b.imageUrl);im.alt=b.name||'Publicidade';im.width=width;im.height=height;if(b.imageUrl&&b.imageUrl!==b.image)im.onerror=()=>{im.onerror=null;im.src=safeMedia(b.imageUrl);};a.append(im);box.append(a);}
+  else if(b.zone){const ins=document.createElement('ins');ins.setAttribute('data-revive-zoneid',b.zone);ins.setAttribute('data-revive-id',b.reviveId);box.append(ins);}
+  if(width>height*2)box.classList.add('wide');
+  return box;
+}
+function migrationSponsorPlaceholder(text){
+  const ph=document.createElement('div');ph.className='sponsor-placeholder';ph.textContent=text;return ph;
+}
+/* Faixas de patrocinador no meio das notícias (página Ao Vivo). Usa os banners marcados como
+   "Meio"; se nenhum estiver marcado, reaproveita os banners largos de imagem, um por faixa. */
+function migrationFillInlineSponsors(scope){
+  const slots=(scope||document).querySelectorAll('.sponsor-inline[data-sponsor-slot]');
+  if(!slots.length)return;
+  const active=migrationBanners.filter(x=>!x.disabled).slice().sort((a,b)=>(Number(a.order)||1)-(Number(b.order)||1));
+  let pool=active.filter(b=>b.position==='middle');
+  if(!pool.length)pool=active.filter(b=>!b.zone&&b.type!=='html'&&b.type!=='video'&&(b.image||b.imageUrl)&&b.position!=='right'&&(Number(b.width)||300)>(Number(b.height)||300)*2);
+  slots.forEach(slot=>{
+    const n=Number(slot.dataset.sponsorSlot)||0;
+    slot.replaceChildren(pool.length?migrationBuildBanner(pool[n%pool.length]):migrationSponsorPlaceholder('Espaço para patrocinador · 728×90'));
+  });
+}
+async function migrationRenderBanners(){
+  try{const r=await window.storage.get('site:migrated-banners');if(r?.value){const parsed=JSON.parse(r.value);if(Array.isArray(parsed))migrationBanners=parsed;}}catch(e){console.warn('Publicidade: usando cópia incorporada',e);}
+  const active=migrationBanners.filter(x=>!x.disabled).slice().sort((a,b)=>(Number(a.order)||1)-(Number(b.order)||1));
+  const topSlot=document.getElementById('migrationSponsors');
+  const rightSlot=document.getElementById('sponsorsRight');
+  const topBanners=active.filter(b=>!rightSlot||migrationBannerPosition(b)==='top');
+  const rightBanners=rightSlot?active.filter(b=>migrationBannerPosition(b)==='right'):[];
+  if(topSlot){
+    topSlot.innerHTML='<div class="section-head"><h2>Publicidade</h2><div class="migration-ad-controls"><button type="button" aria-label="Anúncios anteriores">←</button><button type="button" aria-label="Próximos anúncios">→</button></div></div><div class="migration-ads"></div>';
+    const grid=topSlot.lastElementChild;const controls=topSlot.querySelector('.migration-ad-controls');const buttons=controls.querySelectorAll('button');
+    buttons[0].onclick=()=>grid.scrollBy({left:-320,behavior:'smooth'});buttons[1].onclick=()=>grid.scrollBy({left:320,behavior:'smooth'});
+    for(const b of topBanners)grid.append(migrationBuildBanner(b));
+    if(topBanners.length<2)controls.hidden=true;
+    if(!topBanners.length)grid.append(migrationSponsorPlaceholder('Espaço para patrocinador · 728×90'));
   }
-  if(migrationBanners.some(x=>x.zone&&!x.disabled)){const sc=document.createElement('script');sc.async=true;sc.src='https://adserve.pen6.cc/www/delivery/asyncantifraudjs.php';slot.append(sc);}
+  if(rightSlot){
+    rightSlot.innerHTML='<div class="section-head"><h2>Patrocinadores</h2></div><div class="migration-ads"></div>';
+    const stack=rightSlot.lastElementChild;
+    for(const b of rightBanners)stack.append(migrationBuildBanner(b));
+    if(!rightBanners.length)stack.append(migrationSponsorPlaceholder('Espaço para patrocinador · 300×250'));
+  }
+  if(active.some(x=>x.zone)){const sc=document.createElement('script');sc.async=true;sc.src='https://adserve.pen6.cc/www/delivery/asyncantifraudjs.php';(topSlot||rightSlot)?.append(sc);}
+  migrationFillInlineSponsors(document);
 }
 
 function migrationAdminPanel(){
@@ -6018,6 +6136,7 @@ const CATEGORY_CONFIG = {
 // Proxies públicos de CORS, tentados em ordem (o feed em si não libera
 // requisição direta do navegador); o primeiro que responder é usado.
 const CORS_PROXIES = [
+  (url) => url, // acesso direto: a Agência Brasil já libera CORS (access-control-allow-origin: *)
   (url) => `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,
   (url) => `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(url)}`,
   (url) => `https://corsproxy.io/?url=${encodeURIComponent(url)}`,
@@ -6337,6 +6456,7 @@ function categoryTeaser(text, max=280){
    A Home e a página da editoria usam a mesma lista automática.
    ============================================================ */
 const POLITICS_NEWS_FUNCTION_URL = `${SUPABASE_URL}/functions/v1/politica-news`;
+const TVSENADO_NEWS_FUNCTION_URL = `${SUPABASE_URL}/functions/v1/tvsenado-news`;
 
 /* ============================================================
    MATÉRIAS MANUAIS
@@ -7793,19 +7913,49 @@ function normalizePoliticsArticle(a){
     pubDate: a.pubDate || a.published || '',
     link: a.link || '#',
     image: isFallbackLogo ? '' : rawImage,
-    category: String(a.category || '').trim()
+    category: String(a.category || '').trim(),
+    source: a.source === 'TV Senado' ? 'TV Senado' : '',
+    videoId: /^[\w-]{11}$/.test(a.videoId || '') ? a.videoId : ''
   };
 }
 
-async function fetchPoliticsNews(force=false){
-  if(!force && politicsNewsItems.length && Date.now() - politicsNewsLastFetch < 60000) return politicsNewsItems;
+/* TV Senado como segunda fonte de Política (função tvsenado-news no Supabase).
+   Só entram matérias com texto e imagem; quando há vídeo, ele aparece dentro da matéria.
+   Se a função estiver fora do ar, Política segue normalmente só com a Agência Brasil. */
+async function fetchTvSenadoNews(){
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 12000);
+  try{
+    const res = await fetch(`${TVSENADO_NEWS_FUNCTION_URL}?limit=15`, { cache:'no-store', signal:controller.signal });
+    if(!res.ok) throw new Error('TV Senado HTTP ' + res.status);
+    const data = await res.json();
+    return (Array.isArray(data?.items) ? data.items : [])
+      .map(a => normalizePoliticsArticle({ ...a, source:'TV Senado', category:'Política' }))
+      .filter(it => it.title && it.desc && it.image);
+  }catch(err){
+    console.warn('TV Senado:', err);
+    return [];
+  }finally{
+    clearTimeout(timeout);
+  }
+}
+async function fetchAgenciaBrasilPolitics(){
   const res = await fetch(`${POLITICS_NEWS_FUNCTION_URL}?limit=18`, { cache:'no-store' });
   if(!res.ok) throw new Error('Política HTTP ' + res.status);
   const data = await res.json();
-  const items = Array.isArray(data?.items) ? data.items
+  return Array.isArray(data?.items) ? data.items
     .map(normalizePoliticsArticle)
     .filter(it => it.title && it.category.toLocaleLowerCase('pt-BR') === 'política') : [];
-  if(!items.length) throw new Error(data?.error || 'Agência Brasil não retornou notícias de Política');
+}
+async function fetchPoliticsNews(force=false){
+  if(!force && politicsNewsItems.length && Date.now() - politicsNewsLastFetch < 60000) return politicsNewsItems;
+  const [agencia, senado] = await Promise.all([
+    fetchAgenciaBrasilPolitics().catch(err => { console.warn('Política (Agência Brasil):', err); return []; }),
+    fetchTvSenadoNews()
+  ]);
+  const time = it => { const t = new Date(it.pubDate).getTime(); return isNaN(t) ? 0 : t; };
+  const items = [...agencia, ...senado].sort((a,b) => time(b) - time(a));
+  if(!items.length) throw new Error('Nenhuma fonte de Política retornou notícias');
   politicsNewsItems = mergeManualWithCategory('politica', mergeNewsArchive('politica', items, NEWS_ARCHIVE_MAX_ITEMS));
   politicsNewsLastFetch = Date.now();
   return politicsNewsItems;
@@ -7926,28 +8076,34 @@ function openPoliticsArticle(index){
   const it = politicsNewsItems[index];
   if(!it) return false;
   if(it._manual) return openManualArticle(it);
+  const srcName = it.source === 'TV Senado' ? 'TV Senado' : 'Agência Brasil';
   const articleMain = document.getElementById('categoryArticleMain');
   const back = articleMain?.querySelector('.back-link');
   const kicker = articleMain?.querySelector('.article-kicker');
   const note = articleMain?.querySelector('.article-note');
   if(back){ back.href='#politica'; back.textContent='← Voltar para Política'; back.onclick=function(){ showCategoryPage('politica'); return false; }; }
-  if(kicker) kicker.textContent='Política · Agência Brasil';
-  if(note) note.textContent='Conteúdo automatizado a partir do feed da Agência Brasil, com acesso à publicação original.';
+  if(kicker) kicker.textContent='Política · ' + srcName;
+  if(note) note.textContent='Conteúdo automatizado a partir ' + (srcName === 'TV Senado' ? 'da TV Senado' : 'do feed da Agência Brasil') + ', com acesso à publicação original.';
   document.getElementById('top').style.display = 'none';
   document.getElementById('sportsMain').style.display = 'none';
   document.getElementById('sportsArticleMain').style.display = 'none';
   document.getElementById('categoryMain').style.display = 'none';
   document.getElementById('categoryArticleMain').style.display = '';
   document.getElementById('categoryArticleTitle').textContent = it.title || 'Notícia';
-  document.getElementById('categoryArticleMeta').textContent = `${newsRelativeTime(it.pubDate)} · Agência Brasil`;
+  document.getElementById('categoryArticleMeta').textContent = `${newsRelativeTime(it.pubDate)} · ${srcName}`;
   const summary = document.getElementById('categoryArticleSummary');
   summary.innerHTML = paragraphsFromPolitics(it.desc).map(p=>`<p>${escHtml(p)}</p>`).join('');
+  { const g = document.getElementById('categoryArticleGallery'); if(g){ g.innerHTML=''; g.style.display=''; } }
   const img = document.getElementById('categoryArticleImage');
   if(it.image){ img.src=it.image; img.alt=it.title || ''; img.style.display=''; }
   else { img.removeAttribute('src'); img.style.display='none'; }
+  if(it.videoId){
+    const g = document.getElementById('categoryArticleGallery');
+    if(g) g.innerHTML = `<div class="article-video-wrap"><iframe src="https://www.youtube.com/embed/${encodeURIComponent(it.videoId)}" title="${escAttr(it.title || 'Vídeo')}" loading="lazy" allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div>`;
+  }
   const source = document.getElementById('categoryArticleSource');
   source.href = it.link || '#';
-  source.textContent = 'Ler na Agência Brasil →';
+  source.textContent = 'Ler na ' + srcName + ' →';
   renderRelatedNews('politica', it, 'category');
   window.scrollTo({top:0, behavior:'instant'});
   history.replaceState(null,'','#noticia-politica');
@@ -8043,6 +8199,7 @@ function openEconomyArticle(index){
   const summary = document.getElementById('categoryArticleSummary');
   summary.innerHTML = paragraphsFromPolitics(it.desc).map(p=>`<p>${escHtml(p)}</p>`).join('');
 
+  { const g = document.getElementById('categoryArticleGallery'); if(g){ g.innerHTML=''; g.style.display=''; } }
   const img = document.getElementById('categoryArticleImage');
   if(it.image){
     img.src = it.image;
@@ -8209,6 +8366,7 @@ function openWorldArticle(index){
   document.getElementById('categoryArticleMeta').textContent = newsRelativeTime(it.pubDate);
   const summary = document.getElementById('categoryArticleSummary');
   summary.innerHTML = paragraphsFromPolitics(it.desc).map(p=>`<p>${escHtml(p)}</p>`).join('');
+  { const g = document.getElementById('categoryArticleGallery'); if(g){ g.innerHTML=''; g.style.display=''; } }
   const img = document.getElementById('categoryArticleImage');
   if(it.image){ img.src=it.image; img.alt=it.title || ''; img.style.display=''; }
   else { img.removeAttribute('src'); img.style.display='none'; }
@@ -8443,6 +8601,7 @@ function openTechnologyArticle(index){
   const summary = document.getElementById('categoryArticleSummary');
   summary.innerHTML = paragraphsFromPolitics(it.desc).map(p=>`<p>${escHtml(p)}</p>`).join('');
 
+  { const g = document.getElementById('categoryArticleGallery'); if(g){ g.innerHTML=''; g.style.display=''; } }
   const img = document.getElementById('categoryArticleImage');
   if(it.image){
     img.src = it.image;
@@ -8786,8 +8945,8 @@ function renderLivePortal(){
 
   const lead = items[0];
   const side = items.slice(1,4);
-  const minis = items.slice(4,7);
-  const stream = items.slice(7,15);
+  const minis = items.slice(4,8);
+  const stream = items.slice(8,16);
   const ranked = items.slice(0,5);
 
   const leadOpen = liveOpenExpr(lead);
@@ -8841,6 +9000,9 @@ function renderLivePortal(){
 
   const categorySections = ['rondonia','politica','economia','mundo','tecnologia','esportes']
     .map(liveCategoryBlockHtml)
+    .filter(Boolean)
+    // faixa de patrocinador a cada duas editorias
+    .map((html,i,arr)=> html + (i%2===1 && i<arr.length-1 ? `<div class="sponsor-inline" data-sponsor-slot="${(i+1)/2}"></div>` : ''))
     .join('');
 
   root.innerHTML = `
@@ -8853,6 +9015,8 @@ function renderLivePortal(){
 
         <div class="live-mini-grid">${miniHtml}</div>
 
+        <div class="sponsor-inline" data-sponsor-slot="0"></div>
+
         <div class="live-stream-list">${streamHtml}</div>
 
         <div class="live-category-sections">
@@ -8860,24 +9024,13 @@ function renderLivePortal(){
         </div>
       </section>
 
-      <aside class="live-sidebar">
-        <div class="live-sidebar-box">
-          <h3>Mais lidas agora</h3>
-          <ol class="live-sidebar-ranked">${rankedHtml}</ol>
-        </div>
-
-        <div class="live-sidebar-box">
-          <h3>Editorias</h3>
-          <ol class="live-sidebar-ranked">
-            <li><a href="#politica" onclick="showCategoryPage('politica');return false;">Política</a></li>
-            <li><a href="#economia" onclick="showCategoryPage('economia');return false;">Economia</a></li>
-            <li><a href="#mundo" onclick="showCategoryPage('mundo');return false;">Mundo</a></li>
-            <li><a href="#tecnologia" onclick="showCategoryPage('tecnologia');return false;">Tecnologia</a></li>
-            <li><a href="#esportes/brasileirao" onclick="showSportsSection('brasileirao');return false;">Esportes</a></li>
-          </ol>
-        </div>
-      </aside>
     </div>`;
+
+  // "Mais lidas agora" fica na coluna da direita (fora da área que é redesenhada a cada minuto,
+  // para não recarregar o player da transmissão ao vivo).
+  const railRanked = document.getElementById('liveRailRanked');
+  if(railRanked) railRanked.innerHTML = `<div class="live-sidebar-box"><h3>Mais lidas agora</h3><ol class="live-sidebar-ranked">${rankedHtml}</ol></div>`;
+  if(typeof migrationFillInlineSponsors === 'function') migrationFillInlineSponsors(root);
 }
 function showLivePage(){
   document.getElementById('videosMain') && (document.getElementById('videosMain').style.display='none');
@@ -10606,7 +10759,7 @@ document.addEventListener('DOMContentLoaded',()=>{
   const listStatus=document.createElement('p');listStatus.id='hfBannerListStatus';listStatus.className='hf-notice';listStatus.setAttribute('role','status');banners.prepend(listStatus);
   const edit=document.createElement('section');edit.className='hf-pane';edit.id='hfBannerEdit';
   const sizes=[['Tamanho 728x90',728,90,11],['Tamanho 300x300',300,300,10],['Tamanho 360x215',360,215,1]].map(([group,w,h,n])=>`<optgroup label="${group}">${Array.from({length:n},(_,i)=>`<option value="${w}x${h}:${i+1}">${w}x${h} Bloco ${i+1}</option>`).join('')}</optgroup>`).join('');
-  edit.innerHTML=`<div id="hfBannerStatus" class="hf-notice" role="status"></div><div class="hf-banner-grid"><form class="hf-form" id="hfBannerForm"><h4>Configuração Geral</h4><div class="hf-row"><label for="hfBannerName">Nome do Banner</label><div><input id="hfBannerName" required maxlength="180"></div></div><div class="hf-row"><label for="hfBannerType">Tipo de Banner</label><div><select id="hfBannerType"><option value="image">Imagem (JPG, PNG, GIF)</option><option value="html">HTML (Para Adsense e outros)</option><option value="video">Vídeo (MP4 ou WebM)</option><option value="flash" disabled>Flash (SWF) [Tecnologia obsoleta]</option></select></div></div><div class="hf-row"><label for="hfBannerSize">Tamanho / Ordem</label><div><select id="hfBannerSize">${sizes}</select></div></div><h4 class="hf-section-title" id="hfMediaHeading">Banner por Imagem</h4><div class="hf-row"><label for="hfBannerClicks">Cliques no Banner</label><div><input id="hfBannerClicks" value="ND" disabled></div></div><div class="hf-row" id="hfFileRow"><label for="hfBannerFile" id="hfFileLabel">Imagem</label><div><input id="hfBannerFile" type="file" accept="image/jpeg,image/png,image/gif,image/webp"><small id="hfFileInfo"></small></div></div><div class="hf-row" id="hfUrlRow"><label for="hfBannerMediaUrl">Ou endereço da mídia</label><div><input id="hfBannerMediaUrl" type="url" placeholder="https://..."></div></div><div class="hf-row" id="hfHtmlRow" hidden><label for="hfBannerHtml">Código HTML</label><div><textarea id="hfBannerHtml" placeholder="Cole o código do anúncio"></textarea><small>Exibido em um quadro isolado. Alguns provedores exigem configuração própria.</small></div></div><div class="hf-row" id="hfLinkRow"><label for="hfBannerLink">Link de destino</label><div><input id="hfBannerLink" type="url" placeholder="Link do banner (incluindo o http:// ou https://)"></div></div><div class="hf-row"><label for="hfBannerActive">Publicação</label><div><label><input id="hfBannerActive" type="checkbox" checked> Banner ativo</label></div></div><div class="hf-row"><div></div><div><button class="hf-button" id="hfSaveBanner" type="submit">Salvar Banner</button> <button class="hf-button secondary" type="button" data-view="banners">Voltar</button></div></div></form><aside class="hf-banner-info"><div class="hf-card"><h3>Info</h3><div><p>Veja no layout abaixo os locais disponíveis.</p><p>Os banners deste site são exibidos na faixa de publicidade abaixo do menu. Tamanho define o formato e Bloco define a ordem dentro de cada formato.</p></div></div><div class="hf-card"><h3>Layout do Tema Atual</h3><div><div class="hf-layout-map"><div>INFORMA NA HORA</div><div>Menu de notícias</div><div class="ad">Publicidade · 728×90 / 300×300 / 360×215</div><div>Transmissão ao vivo</div><div>Notícias e editorias</div></div></div></div><div class="hf-card"><h3>Prévia do Banner</h3><div class="hf-preview" id="hfBannerPreview"></div></div></aside></div>`;
+  edit.innerHTML=`<div id="hfBannerStatus" class="hf-notice" role="status"></div><div class="hf-banner-grid"><form class="hf-form" id="hfBannerForm"><h4>Configuração Geral</h4><div class="hf-row"><label for="hfBannerName">Nome do Banner</label><div><input id="hfBannerName" required maxlength="180"></div></div><div class="hf-row"><label for="hfBannerType">Tipo de Banner</label><div><select id="hfBannerType"><option value="image">Imagem (JPG, PNG, GIF)</option><option value="html">HTML (Para Adsense e outros)</option><option value="video">Vídeo (MP4 ou WebM)</option><option value="flash" disabled>Flash (SWF) [Tecnologia obsoleta]</option></select></div></div><div class="hf-row"><label for="hfBannerSize">Tamanho / Ordem</label><div><select id="hfBannerSize">${sizes}</select></div></div><div class="hf-row"><label for="hfBannerPosition">Local no site</label><div><select id="hfBannerPosition"><option value="">Automático (largo no topo, demais na direita)</option><option value="top">Topo — abaixo do menu</option><option value="right">Direita — coluna do Ao Vivo</option><option value="middle">Meio — entre os blocos de notícias</option></select></div></div><h4 class="hf-section-title" id="hfMediaHeading">Banner por Imagem</h4><div class="hf-row"><label for="hfBannerClicks">Cliques no Banner</label><div><input id="hfBannerClicks" value="ND" disabled></div></div><div class="hf-row" id="hfFileRow"><label for="hfBannerFile" id="hfFileLabel">Imagem</label><div><input id="hfBannerFile" type="file" accept="image/jpeg,image/png,image/gif,image/webp"><small id="hfFileInfo"></small></div></div><div class="hf-row" id="hfUrlRow"><label for="hfBannerMediaUrl">Ou endereço da mídia</label><div><input id="hfBannerMediaUrl" type="url" placeholder="https://..."></div></div><div class="hf-row" id="hfHtmlRow" hidden><label for="hfBannerHtml">Código HTML</label><div><textarea id="hfBannerHtml" placeholder="Cole o código do anúncio"></textarea><small>Exibido em um quadro isolado. Alguns provedores exigem configuração própria.</small></div></div><div class="hf-row" id="hfLinkRow"><label for="hfBannerLink">Link de destino</label><div><input id="hfBannerLink" type="url" placeholder="Link do banner (incluindo o http:// ou https://)"></div></div><div class="hf-row"><label for="hfBannerActive">Publicação</label><div><label><input id="hfBannerActive" type="checkbox" checked> Banner ativo</label></div></div><div class="hf-row"><div></div><div><button class="hf-button" id="hfSaveBanner" type="submit">Salvar Banner</button> <button class="hf-button secondary" type="button" data-view="banners">Voltar</button></div></div></form><aside class="hf-banner-info"><div class="hf-card"><h3>Info</h3><div><p>Veja no layout abaixo os locais disponíveis.</p><p>Os banners deste site são exibidos em dois espaços: no topo (faixa abaixo do menu) e na coluna da direita da página Ao Vivo. Use "Local no site" para escolher. Tamanho define o formato e Bloco define a ordem dentro de cada formato.</p></div></div><div class="hf-card"><h3>Layout do Tema Atual</h3><div><div class="hf-layout-map"><div>INFORMA NA HORA</div><div>Menu de notícias</div><div class="ad">Publicidade topo · 728×90</div><div>Notícias e editorias</div><div>Direita: Transmissão ao vivo</div><div class="ad">Direita: Patrocinadores · 300×300</div></div></div></div><div class="hf-card"><h3>Prévia do Banner</h3><div class="hf-preview" id="hfBannerPreview"></div></div></aside></div>`;
   content.append(edit);
   const settings=document.createElement('section');settings.className='hf-pane';settings.id='hfSettings';settings.innerHTML='<p class="hf-notice">Os itens marcados com ↗ no menu abrem os módulos que continuam no painel antigo.</p><div id="hfSettingsHost"></div>';content.append(settings);
   const videos=document.createElement('section');videos.className='hf-pane';videos.id='hfVideos';videos.innerHTML='<div class="hf-card"><h3>Transmissão ao vivo</h3><div id="hfLiveHost"></div></div><a class="hf-button secondary" href="https://informanahora.com.br/hf-admin/" target="_blank" rel="noopener">Gerenciar vídeos no painel antigo ↗</a>';content.append(videos);
@@ -10620,7 +10773,7 @@ document.addEventListener('DOMContentLoaded',()=>{
   function route(view){if(view==='banners'){show('hfBanners','Gerenciar Banners');table();loadBanners();}else if(view==='posts'||view==='scheduled'){show('hfPosts',view==='scheduled'?'Agendamento':'Gerenciar Posts');$('adminArticleFilter').value=view==='scheduled'?'scheduled':'all';renderAdminArticleList();}else if(view==='videos'){show('hfVideos','Vídeos');}else if(view==='settings'){show('hfSettings','Configurações do site');}}
   function preview(){const host=$('hfBannerPreview');host.replaceChildren();const type=$('hfBannerType').value;let el;if(editingOriginal?.zone){host.textContent='Anúncio servido pela integração Revive existente.';return;}const src=fileData||$('hfBannerMediaUrl').value||editingOriginal?.image||editingOriginal?.videoUrl||editingOriginal?.imageUrl;if(type==='html'){host.textContent='A prévia de HTML é exibida somente no site após salvar.';return;}if(!src){host.textContent='Selecione uma mídia para visualizar.';return;}if(type==='video'){el=document.createElement('video');el.controls=true;}else{el=document.createElement('img');el.alt=$('hfBannerName').value||'Prévia do banner';}el.src=src;host.append(el);}
   function typeChanged(){const type=$('hfBannerType').value;$('hfHtmlRow').hidden=type!=='html';$('hfFileRow').hidden=type==='html';$('hfUrlRow').hidden=type==='html';$('hfLinkRow').hidden=type==='html';$('hfMediaHeading').textContent=type==='html'?'Banner por HTML':type==='video'?'Banner por Vídeo':'Banner por Imagem';$('hfFileLabel').textContent=type==='video'?'Vídeo':'Imagem';$('hfBannerFile').accept=type==='video'?'video/mp4,video/webm':'image/jpeg,image/png,image/gif,image/webp';preview();}
-  function openBanner(b=null){editingId=b?.id||null;editingOriginal=b?structuredClone(b):null;fileData='';$('hfBannerForm').reset();$('hfBannerName').value=b?.name||(b?.zone?'Revive zona '+b.zone:'');$('hfBannerType').value=b?.zone?'html':b?.type||'image';$('hfBannerSize').value=`${b?.width||728}x${b?.height||90}:${b?.order||(b?.name==='banner 06 10 expoturismo'?2:1)}`;if(!$('hfBannerSize').value)$('hfBannerSize').selectedIndex=0;$('hfBannerLink').value=b?.link||'';$('hfBannerMediaUrl').value=b?.videoUrl||(b?.image?.startsWith('https:')?b.image:'')||'';$('hfBannerHtml').value=b?.html||'';$('hfBannerActive').checked=!b?.disabled;$('hfFileInfo').textContent=b?.image?'Imagem atual carregada. Escolha um arquivo apenas para substituí-la.':'';for(const id of ['hfBannerType','hfBannerSize','hfBannerHtml'])$(id).disabled=!!b?.zone;show('hfBannerEdit',b?'Atualizar Banner':'Adicionar Banner',b?'Editar':'Adicionar');notice(b?.zone?'A integração Revive será preservada. Você pode alterar o nome e a ativação.':'');typeChanged();}
+  function openBanner(b=null){editingId=b?.id||null;editingOriginal=b?structuredClone(b):null;fileData='';$('hfBannerForm').reset();$('hfBannerName').value=b?.name||(b?.zone?'Revive zona '+b.zone:'');$('hfBannerType').value=b?.zone?'html':b?.type||'image';$('hfBannerSize').value=`${b?.width||728}x${b?.height||90}:${b?.order||(b?.name==='banner 06 10 expoturismo'?2:1)}`;if(!$('hfBannerSize').value)$('hfBannerSize').selectedIndex=0;$('hfBannerLink').value=b?.link||'';$('hfBannerPosition').value=b?.position||'';$('hfBannerMediaUrl').value=b?.videoUrl||(b?.image?.startsWith('https:')?b.image:'')||'';$('hfBannerHtml').value=b?.html||'';$('hfBannerActive').checked=!b?.disabled;$('hfFileInfo').textContent=b?.image?'Imagem atual carregada. Escolha um arquivo apenas para substituí-la.':'';for(const id of ['hfBannerType','hfBannerSize','hfBannerHtml'])$(id).disabled=!!b?.zone;show('hfBannerEdit',b?'Atualizar Banner':'Adicionar Banner',b?'Editar':'Adicionar');notice(b?.zone?'A integração Revive será preservada. Você pode alterar o nome e a ativação.':'');typeChanged();}
   shell.addEventListener('click',e=>{const btn=e.target.closest('[data-view],[data-action]');if(!btn)return;if(btn.dataset.view)route(btn.dataset.view);if(btn.dataset.action==='new-banner')openBanner();if(btn.dataset.action==='new-post'){route('posts');resetAdminEditor();}if(btn.dataset.action==='logout')$('adminDashboardLogoutBtn').click();});
   $('hfMenuToggle').onclick=()=>{const active=shell.classList.toggle('hf-menu-open');$('hfMenuToggle').setAttribute('aria-expanded',String(active));};
   $('hfBannerSearch').oninput=table;$('hfBannerType').onchange=()=>{fileData='';$('hfBannerFile').value='';$('hfBannerMediaUrl').value='';typeChanged();};$('hfBannerMediaUrl').oninput=preview;
@@ -10631,7 +10784,7 @@ document.addEventListener('DOMContentLoaded',()=>{
     if(!siteSupabase)throw new Error('Conexão com o banco indisponível. Nada foi publicado.');
     const raw=await window.storage.get('site:migrated-banners');const latest=raw?.value?JSON.parse(raw.value):structuredClone(MIGRATION_BANNERS);if(!Array.isArray(latest))throw new Error('Não foi possível ler os banners existentes.');
     const original=editingId?latest.find(b=>b.id===editingId):null;if(editingId&&!original)throw new Error('Este banner foi removido. Atualize a lista antes de editar.');if(raw?.value&&editingOriginal&&JSON.stringify(original)!==JSON.stringify(editingOriginal))throw new Error('Este banner foi alterado em outra sessão. Reabra-o pela lista para atualizar.');
-    const b={...(original||{}),id:editingId||'banner-'+crypto.randomUUID(),name:$('hfBannerName').value.trim(),disabled:!$('hfBannerActive').checked};if(!b.name)throw new Error('Informe o nome do banner.');
+    const b={...(original||{}),id:editingId||'banner-'+crypto.randomUUID(),name:$('hfBannerName').value.trim(),disabled:!$('hfBannerActive').checked};{const pos=$('hfBannerPosition').value;if(pos)b.position=pos;else delete b.position;}if(!b.name)throw new Error('Informe o nome do banner.');
     if(!b.zone){const [size,order]=$('hfBannerSize').value.split(':');const [width,height]=size.split('x');Object.assign(b,{width,height,order:Number(order),type:$('hfBannerType').value});const media=fileData||webUrl($('hfBannerMediaUrl').value.trim());b.link=webUrl($('hfBannerLink').value.trim());if(b.type==='image'){b.image=media||(original?.type!=='video'&&original?.type!=='html'?original?.image||original?.imageUrl:'');if(!b.image)throw new Error('Selecione uma imagem ou informe seu endereço.');delete b.videoUrl;delete b.html;}else if(b.type==='video'){b.videoUrl=media||original?.videoUrl;if(!b.videoUrl)throw new Error('Selecione um vídeo ou informe seu endereço.');delete b.image;delete b.html;}else{b.html=$('hfBannerHtml').value.trim();if(!b.html)throw new Error('Informe o código HTML do anúncio.');delete b.image;delete b.videoUrl;}}
     const next=latest.map(x=>x.id===b.id?b:x);if(!editingId)next.push(b);await window.storage.set('site:migrated-banners',JSON.stringify(next));migrationBanners=next;editingId=b.id;editingOriginal=structuredClone(b);$('hfTitle').textContent='Atualizar Banner';$('hfCrumbCurrent').textContent='Editar';notice('✓ Concluído: O banner foi salvo com sucesso!','success');table();
   }catch(err){notice('Não foi possível salvar: '+err.message,'error');}finally{btn.disabled=false;}};
